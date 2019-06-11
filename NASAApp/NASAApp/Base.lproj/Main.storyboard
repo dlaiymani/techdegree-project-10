@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XZO-R5-hkO">
     <device id="ipad11_0rounded" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,6 +29,7 @@
                                         </state>
                                         <connections>
                                             <action selector="roverButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I1I-af-pdx"/>
+                                            <segue destination="iYa-Ft-4st" kind="show" identifier="RoverSegue" id="Xlg-vK-aiZ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8L-gK-e9r">
@@ -50,6 +51,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="XuE-R2-Hjg"/>
                     <connections>
                         <outlet property="eyeInTheSkyButton" destination="k8L-gK-e9r" id="Bxh-LE-t6Z"/>
                         <outlet property="roverButton" destination="9Lh-z7-vZX" id="K1p-SF-dwp"/>
@@ -57,7 +59,76 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-260" y="-39"/>
+            <point key="canvasLocation" x="624.46043165467631" y="-58.291457286432163"/>
+        </scene>
+        <!--Rover Photo List Controller-->
+        <scene sceneID="N12-m0-YRn">
+            <objects>
+                <collectionViewController id="iYa-Ft-4st" customClass="RoverPhotoListController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bRB-Ut-l7N">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yaf-IT-Obh">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RoverPhotoCell" id="wuw-B1-p5R" customClass="RoverPhotoCell" customModule="NASAApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rocket" translatesAutoresizingMaskIntoConstraints="NO" id="qlL-pg-xqQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="qlL-pg-xqQ" firstAttribute="leading" secondItem="wuw-B1-p5R" secondAttribute="leading" id="ELs-nA-XT8"/>
+                                    <constraint firstAttribute="trailing" secondItem="qlL-pg-xqQ" secondAttribute="trailing" id="a29-yo-Fyf"/>
+                                    <constraint firstAttribute="bottom" secondItem="qlL-pg-xqQ" secondAttribute="bottom" id="aKQ-1s-3KM"/>
+                                    <constraint firstItem="qlL-pg-xqQ" firstAttribute="top" secondItem="wuw-B1-p5R" secondAttribute="top" id="xWT-9O-a13"/>
+                                </constraints>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XSg-4g-NRD">
+                            <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="iYa-Ft-4st" id="pRB-Ba-LKB"/>
+                            <outlet property="delegate" destination="iYa-Ft-4st" id="547-0N-eVg"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="8ct-Ln-53C"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0zP-Ks-5Rg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1441" y="-58"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kFP-rq-hDz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XZO-R5-hkO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vl5-uD-1TO">
+                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="d70-3c-sOh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hGg-xo-FcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129.49640287769785" y="-58.291457286432163"/>
         </scene>
     </scenes>
     <resources>
