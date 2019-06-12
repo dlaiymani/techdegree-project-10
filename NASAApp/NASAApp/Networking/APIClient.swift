@@ -16,7 +16,7 @@ class APIClient {
     
     func execute(_ url: URL, completion: @escaping WebServiceResponse) {
         
-        AF.request(url).validate().responseJSON { response in
+        Alamofire.request(url).validate().responseJSON { response in
             
             if let error = response.error {
                 completion(nil, error)

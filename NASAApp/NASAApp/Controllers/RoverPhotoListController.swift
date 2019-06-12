@@ -41,10 +41,14 @@ class RoverPhotoListController: UICollectionViewController {
                     //let jsonDict = json[0]["photos"] as! [Any]
                     let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
                     let roverPhotos = photos["photos"]!
+                    self.dataSource.updateData(roverPhotos)
                     for photo in roverPhotos {
-                        print(photo.roverImageSource)
+                //        print(photo.roverImageSource)
                     }
                     
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
                 }
                 
             }

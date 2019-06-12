@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
     
@@ -28,11 +30,25 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: RoverPhotoCell.reuseIdentifier, for: indexPath) as! RoverPhotoCell
         
         let photo = data[indexPath.row]
-        photoCell.photoView.image = photo.roverImage
+        
+        let url = URL(string: photo.roverImageSource)
+        print(url)
+
+    
+        photoCell.photoView.af_setImage(withURL: url!)
+      //  photoCell.photoView?.af_setImage(withURL: url!, placeholderImage: UIImage(named: "planet"), filter: nil,  imageTransition: .CrossDissolve(0.5), runImageTransitionIfCached: true, completion: nil)
+
+     //   photoCell.photoView.image = photo.roverImage
         
         return photoCell
     }
     
+    
+    // MARK: - Helpers
+    func updateData(_ data: [RoverPhoto]) {
+        self.data = data
+        
+    }
     
     
     

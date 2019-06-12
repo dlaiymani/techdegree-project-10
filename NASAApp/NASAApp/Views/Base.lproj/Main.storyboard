@@ -95,6 +95,9 @@
                                     <constraint firstAttribute="bottom" secondItem="qlL-pg-xqQ" secondAttribute="bottom" id="aKQ-1s-3KM"/>
                                     <constraint firstItem="qlL-pg-xqQ" firstAttribute="top" secondItem="wuw-B1-p5R" secondAttribute="top" id="xWT-9O-a13"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="photoView" destination="qlL-pg-xqQ" id="B0u-BL-thL"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XSg-4g-NRD">
