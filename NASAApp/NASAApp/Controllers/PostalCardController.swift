@@ -9,11 +9,23 @@
 import UIKit
 
 class PostalCardController: UIViewController {
-
+    
+    var roverPhoto: RoverPhoto?
+    
+    @IBOutlet weak var roverImageView: UIImageView!
+    @IBOutlet weak var colorSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var userText: UITextField!
+    @IBOutlet weak var userLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let roverPhoto = roverPhoto {
+           print(roverPhoto.roverImage?.size)
+            roverImageView.image = roverPhoto.roverImage
+            userLabel.text = roverPhoto.photoDate
+        }
 
-        // Do any additional setup after loading the view.
     }
     
 

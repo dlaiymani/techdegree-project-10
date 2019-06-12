@@ -32,13 +32,16 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         let photo = data[indexPath.row]
         
         let url = URL(string: photo.roverImageSource)
-        print(url)
+       // print(url)
 
-    
-        photoCell.photoView.af_setImage(withURL: url!)
-      //  photoCell.photoView?.af_setImage(withURL: url!, placeholderImage: UIImage(named: "planet"), filter: nil,  imageTransition: .CrossDissolve(0.5), runImageTransitionIfCached: true, completion: nil)
-
-     //   photoCell.photoView.image = photo.roverImage
+        Alamofire.request(url!).responseImage { response in
+            if let image = response.result.value {
+                DispatchQueue.main.async {
+                    photoCell.photoView.image = image
+                    self.data[indexPath.row].roverImage = image
+                }
+            }
+        }
         
         return photoCell
     }
@@ -47,9 +50,11 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
     // MARK: - Helpers
     func updateData(_ data: [RoverPhoto]) {
         self.data = data
-        
     }
     
+    func object(at indexPath: IndexPath) -> RoverPhoto {
+        return self.data[indexPath.row]
+    }
     
     
 }

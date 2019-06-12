@@ -13,7 +13,7 @@ struct RoverPhoto: Decodable {
     
     let id: Int
     let roverImageSource: String
-    let roverImage: UIImage?
+    var roverImage: UIImage?
     let photoDate: String
     
     enum RoverPhotoCodingKeys: String, CodingKey {

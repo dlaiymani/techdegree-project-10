@@ -119,13 +119,14 @@
         <!--Make Your Own Postal Card-->
         <scene sceneID="l4j-eX-B8q">
             <objects>
-                <viewController id="IOh-P7-zUs" sceneMemberID="viewController">
+                <viewController id="IOh-P7-zUs" customClass="PostalCardController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q81-y8-2D2">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHF-zQ-l06">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHF-zQ-l06">
                                 <rect key="frame" x="0.0" y="103.5" width="834" height="625.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EHF-zQ-l06" secondAttribute="height" multiplier="4:3" id="7FH-Ly-CvA"/>
                                 </constraints>
@@ -145,6 +146,13 @@
                                     <segment title="Yellow"/>
                                 </segments>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-KZ-ZsS">
+                                <rect key="frame" x="121" y="799" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -162,6 +170,12 @@
                     <navigationItem key="navigationItem" title="Make Your Own Postal Card" id="zRF-f0-nIV">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="9fc-bt-sey"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="colorSegmentedControl" destination="keI-7R-c1H" id="fiG-mW-b89"/>
+                        <outlet property="roverImageView" destination="EHF-zQ-l06" id="hpF-qA-kko"/>
+                        <outlet property="userLabel" destination="KZj-KZ-ZsS" id="grl-oc-388"/>
+                        <outlet property="userText" destination="tjW-ei-BYw" id="MXg-38-E4D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fY0-8u-fW8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

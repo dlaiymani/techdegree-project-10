@@ -42,9 +42,6 @@ class RoverPhotoListController: UICollectionViewController {
                     let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
                     let roverPhotos = photos["photos"]!
                     self.dataSource.updateData(roverPhotos)
-                    for photo in roverPhotos {
-                //        print(photo.roverImageSource)
-                    }
                     
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
@@ -53,7 +50,16 @@ class RoverPhotoListController: UICollectionViewController {
                 
             }
         }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        
+        if let cell = sender as? RoverPhotoCell, let indexPath = self.collectionView.indexPath(for: cell), let postalCardViewController = segue.destination as? PostalCardController {
+           // postalCardViewController.roverImageView.image = cell.photoView.image
+            postalCardViewController.roverPhoto = dataSource.object(at: indexPath)
+        }
         
     }
 }
