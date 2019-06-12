@@ -49,15 +49,45 @@ class PostalCardController: UIViewController {
         default:
             userLabel.textColor = .black
         }
-        
     }
     
+    func addTextToImage(text: String, inImage: UIImage, atPoint:CGPoint) -> UIImage? {
+    
+        // Create bitmap based graphics context
+        UIGraphicsBeginImageContextWithOptions(inImage.size, false, 0.0)
+        //Put the image into a rectangle as large as the original image.
+        inImage.draw(in: CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height))
+        // Our drawing bounds
+        let drawingBounds = CGRect(x: 0.0, y: 0.0, width: inImage.size.width, height: inImage.size.height)
+        
+        let font = UIFont(name: "Snell Roundhand Bold", size: 30.0)
+        let textFontAttributes = [
+            NSAttributedString.Key.font: font
+        ]
+        
+        let attributes = font != nil ? [NSAttributedString.Key.font: font] : [:]
+        let textWidth = text.size(withAttributes: attributes).width
+        let textHeight = text.size(withAttributes: attributes).height
+        
+        let textRect = CGRect(x: drawingBounds.size.width/2 - textWidth/2, y: drawingBounds.size.height/2 - textHeight/2,
+                              width: textWidth, height: textHeight)
+        
+        text.draw(in: textRect, withAttributes: attributes)
+        // Get the image from the graphics context
+        let newImag = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImag
+    }
+
 }
 
 extension PostalCardController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.userText.resignFirstResponder()
+
+        let newImage = addTextToImage(text: userText.text!, inImage: roverImageView.image!, atPoint: CGPoint(x: 0, y: 0))
+        roverImageView.image = newImage
         return true
     }
     
