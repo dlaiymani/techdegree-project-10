@@ -15,11 +15,32 @@ class RoverPhotoListController: UICollectionViewController {
     lazy var dataSource: RoverPhotoListDataSource = {
         return RoverPhotoListDataSource(collectionView: self.collectionView)
     }()
+    
+    private let roverAPIClient = APIClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.dataSource = dataSource
+        
+        fetchRoverPhotos()
 
+    }
+    
+    func fetchRoverPhotos() {
+        
+        guard let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2019-6-9&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN") else {
+            return
+        }
+        
+        roverAPIClient.execute(roverUrl) { (json, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print(json?.description)
+            }
+        }
+        
+        
     }
 
     
