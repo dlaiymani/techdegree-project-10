@@ -19,24 +19,48 @@ class PostalCardController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userText.delegate = self
         
         if let roverPhoto = roverPhoto {
            print(roverPhoto.roverImage?.size)
             roverImageView.image = roverPhoto.roverImage
             userLabel.text = roverPhoto.photoDate
-        }
+            
+            userLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 4)
 
+        }
+    }
+    
+    
+    @IBAction func userTextValueChanged(_ sender: UITextField) {
+        userLabel.text = sender.text
+    }
+    
+    @IBAction func colorChanged(_ sender: Any) {
+        switch colorSegmentedControl.selectedSegmentIndex {
+        case 0:
+            userLabel.textColor = .red
+        case 1:
+            userLabel.textColor = .blue
+        case 2:
+            userLabel.textColor = .green
+        case 3:
+            userLabel.textColor = .yellow
+        default:
+            userLabel.textColor = .black
+        }
+        
+    }
+    
+}
+
+extension PostalCardController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.userText.resignFirstResponder()
+        return true
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

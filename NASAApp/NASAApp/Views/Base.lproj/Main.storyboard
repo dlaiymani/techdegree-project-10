@@ -126,16 +126,18 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHF-zQ-l06">
                                 <rect key="frame" x="0.0" y="103.5" width="834" height="625.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EHF-zQ-l06" secondAttribute="height" multiplier="4:3" id="7FH-Ly-CvA"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjW-ei-BYw">
-                                <rect key="frame" x="0.0" y="869" width="834" height="30"/>
+                                <rect key="frame" x="16" y="869" width="802" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="userTextValueChanged:" destination="IOh-P7-zUs" eventType="editingChanged" id="Ead-py-piS"/>
+                                </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="keI-7R-c1H">
                                 <rect key="frame" x="309.5" y="799" width="215" height="29"/>
@@ -145,11 +147,13 @@
                                     <segment title="Green"/>
                                     <segment title="Yellow"/>
                                 </segments>
+                                <connections>
+                                    <action selector="colorChanged:" destination="IOh-P7-zUs" eventType="valueChanged" id="bMR-U2-hhh"/>
+                                </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-KZ-ZsS">
-                                <rect key="frame" x="121" y="799" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-KZ-ZsS">
+                                <rect key="frame" x="0.0" y="397" width="834" height="38"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -157,11 +161,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="keI-7R-c1H" firstAttribute="centerX" secondItem="Q81-y8-2D2" secondAttribute="centerX" id="139-e9-yVu"/>
-                            <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="tjW-ei-BYw" secondAttribute="trailing" id="696-Hd-u7B"/>
+                            <constraint firstItem="KZj-KZ-ZsS" firstAttribute="centerY" secondItem="EHF-zQ-l06" secondAttribute="centerY" id="2ya-Lv-AD9"/>
+                            <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="tjW-ei-BYw" secondAttribute="trailing" constant="16" id="696-Hd-u7B"/>
+                            <constraint firstItem="KZj-KZ-ZsS" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="F3s-Ng-gyg"/>
                             <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="EHF-zQ-l06" secondAttribute="trailing" id="L04-nC-rU8"/>
                             <constraint firstItem="EHF-zQ-l06" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="MUS-8A-ASI"/>
+                            <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="KZj-KZ-ZsS" secondAttribute="trailing" id="OAU-gO-TpO"/>
                             <constraint firstItem="EHF-zQ-l06" firstAttribute="centerY" secondItem="ytM-BQ-fZ5" secondAttribute="centerY" multiplier="2:3" id="Whw-xq-W8j"/>
-                            <constraint firstItem="tjW-ei-BYw" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="lpg-x7-Glh"/>
+                            <constraint firstItem="tjW-ei-BYw" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" constant="16" id="lpg-x7-Glh"/>
                             <constraint firstItem="keI-7R-c1H" firstAttribute="top" secondItem="EHF-zQ-l06" secondAttribute="bottom" constant="70" id="sfS-gQ-wZz"/>
                             <constraint firstItem="tjW-ei-BYw" firstAttribute="top" secondItem="EHF-zQ-l06" secondAttribute="bottom" constant="140" id="toL-jp-oLz"/>
                         </constraints>
