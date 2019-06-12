@@ -25,12 +25,7 @@ struct RoverPhoto: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try! decoder.container(keyedBy: RoverPhotoCodingKeys.self)
-        guard let id = container.codingPath.first else {
-            let context = DecodingError.Context.init(codingPath: container.codingPath, debugDescription: "RoverPhoto key not found")
-            throw DecodingError.keyNotFound(RoverPhotoCodingKeys.id, context)
-        }
-        self.id = id.intValue!
-        
+        self.id = try container.decode(Int.self, forKey: .id)
         self.roverImageSource = try container.decode(String.self, forKey: .img_src)
         self.photoDate = try container.decode(String.self, forKey: .earth_date)
         self.roverImage = nil

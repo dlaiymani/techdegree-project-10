@@ -32,16 +32,27 @@ class RoverPhotoListController: UICollectionViewController {
             return
         }
         
-        roverAPIClient.execute(roverUrl) { (json, error) in
+        roverAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
-                print(json?.description)
+                if let jsonData = jsonData {
+                    let decoder = JSONDecoder()
+                    //let jsonDict = json[0]["photos"] as! [Any]
+                    let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
+                    let roverPhotos = photos["photos"]!
+                    for photo in roverPhotos {
+                        print(photo.roverImageSource)
+                    }
+                    
+                }
+                
             }
         }
         
         
     }
+}
 
     
 
@@ -76,4 +87,3 @@ class RoverPhotoListController: UICollectionViewController {
     }
     */
 
-}

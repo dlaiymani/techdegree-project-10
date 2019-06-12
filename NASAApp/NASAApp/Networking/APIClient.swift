@@ -12,21 +12,29 @@ import Alamofire
 
 class APIClient {
     
-    typealias WebServiceResponse = ([[String: Any]]?, Error?) -> Void
+    typealias WebServiceResponse = (Data?, Error?) -> Void
     
     func execute(_ url: URL, completion: @escaping WebServiceResponse) {
         
         AF.request(url).validate().responseJSON { response in
-            switch response.result {
-            case .success(let json):
-                if let jsonArray = json as? [[String: Any]] {
-                    completion(jsonArray, nil)
-                } else if let jsonDict = json as? [String: Any] {
-                    completion([jsonDict], nil)
-                }
-            case .failure(let error):
+            
+            if let error = response.error {
                 completion(nil, error)
+            } else {
+                completion(response.data, nil)
             }
+            
+//            switch response.result {
+//            case .success(let json):
+//
+//                if let jsonArray = json as? [[String: Any]] {
+//                    completion(jsonArray, nil)
+//                } else if let jsonDict = json as? [String: Any] {
+//                    completion([jsonDict], nil)
+//                }
+//            case .failure(let error):
+//                completion(nil, error)
+//            }
         }
     }
 }
