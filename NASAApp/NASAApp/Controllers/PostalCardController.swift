@@ -59,13 +59,12 @@ class PostalCardController: UIViewController {
         inImage.draw(in: CGRect(x: 0, y: 0, width: inImage.size.width, height: inImage.size.height))
         // Our drawing bounds
         let drawingBounds = CGRect(x: 0.0, y: 0.0, width: inImage.size.width, height: inImage.size.height)
+        let font = self.userLabel.font
+        let color = self.userLabel.textColor
         
-        let font = UIFont(name: "Snell Roundhand Bold", size: 30.0)
-        let textFontAttributes = [
-            NSAttributedString.Key.font: font
-        ]
+        //let font = UIFont(name: "Snell Roundhand Bold", size: 30.0)
         
-        let attributes = font != nil ? [NSAttributedString.Key.font: font] : [:]
+        let attributes = font != nil ? [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor : color] : [:]
         let textWidth = text.size(withAttributes: attributes).width
         let textHeight = text.size(withAttributes: attributes).height
         
@@ -88,6 +87,7 @@ extension PostalCardController: UITextFieldDelegate {
 
         let newImage = addTextToImage(text: userText.text!, inImage: roverImageView.image!, atPoint: CGPoint(x: 0, y: 0))
         roverImageView.image = newImage
+        
         return true
     }
     
