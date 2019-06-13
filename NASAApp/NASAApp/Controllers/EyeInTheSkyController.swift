@@ -8,11 +8,15 @@
 
 import UIKit
 import MapKit
+import Alamofire
+import AlamofireImage
 
 class EyeInTheSkyController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageView: UIImageView!
+    
+    private let earthPhotoAPIClient = APIClient()
     
     lazy var locationManager: LocationManager = {
         return LocationManager(delegate: self, permissionsDelegate: nil)
@@ -73,6 +77,42 @@ class EyeInTheSkyController: UIViewController {
         
     }
     
+    func fetchEarthPhoto(forCoordinate coordinate: Coordinate) {
+        
+        let urlString = "https://api.nasa.gov/planetary/earth/imagery/?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN"
+        
+        guard let roverUrl = URL(string: urlString) else {
+            return
+        }
+        
+        earthPhotoAPIClient.execute(roverUrl) { (jsonData, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if let jsonData = jsonData {
+                    let decoder = JSONDecoder()
+                    let photo = try! decoder.decode(EarthPhoto.self, from: jsonData)
+                    DispatchQueue.main.async {
+                        self.displayPhoto(url: photo.earthPhotoSource)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func displayPhoto(url: String) {
+        print(url)
+        Alamofire.request(url).responseImage { response in
+            if let image = response.result.value {
+                DispatchQueue.main.async {
+                    self.imageView.isHidden = false
+                    self.imageView.image = image
+                }
+            }
+        }
+    }
+    
 }
 
 
@@ -81,6 +121,11 @@ extension EyeInTheSkyController: LocationManagerDelegate {
     func obtainedCoordinates(_ coordinate: Coordinate) {
         self.coordinate = coordinate
         adjustMap(with: coordinate)
+        print(coordinate.latitude)
+        print(coordinate.longitude)
+        
+        fetchEarthPhoto(forCoordinate: coordinate)
+        
     }
     
     func failedWithError(_ error: LocationError) {
