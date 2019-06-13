@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class PostalCardController: UIViewController {
+class PostalCardController: UIViewController, MFMailComposeViewControllerDelegate {
     
     var roverPhoto: RoverPhoto?
     
@@ -66,17 +67,37 @@ class PostalCardController: UIViewController {
         roverImageView.image = newImage
         
         
-        let shareViewController = UIActivityViewController(activityItems: [newImage, "hello"], applicationActivities: nil)
-
-     //   let shareViewController = UIActivityViewController(activityItems: [newImage], applicationActivities: nil)
-        present(shareViewController, animated: true, completion: nil)
-        if let popOver = shareViewController.popoverPresentationController {
-            popOver.sourceView = self.view
-            popOver.barButtonItem = self.navigationItem.rightBarButtonItem;
-
-           // popOver.sourceRect = popOver.barButtonItem
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["laiymani@mac.com"])
+            mail.setSubject("Greetings From Mars")
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            let imageData: Data = newImage!.pngData()!
+            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "PostalCard.png")
+            
+            present(mail, animated: true)
+        } else {
+            // show failure alert
         }
+        
+        
+//        let shareViewController = UIActivityViewController(activityItems: [newImage, "hello"], applicationActivities: nil)
+//
+//     //   let shareViewController = UIActivityViewController(activityItems: [newImage], applicationActivities: nil)
+//        present(shareViewController, animated: true, completion: nil)
+//        if let popOver = shareViewController.popoverPresentationController {
+//            popOver.sourceView = self.view
+//            popOver.barButtonItem = self.navigationItem.rightBarButtonItem;
+//
+//           // popOver.sourceRect = popOver.barButtonItem
+//        }
     }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
     
     
     func addTextToImage(text: String, inImage: UIImage, atPoint:CGPoint) -> UIImage? {
