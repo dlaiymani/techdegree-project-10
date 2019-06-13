@@ -40,6 +40,7 @@
                                         </state>
                                         <connections>
                                             <action selector="eyeInTheSkyButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dq4-mM-XLf"/>
+                                            <segue destination="3Pq-iN-jDs" kind="show" identifier="EyeInTheSkySegue" id="Jtf-i0-SAT"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -60,6 +61,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="624.46043165467631" y="-58.291457286432163"/>
+        </scene>
+        <!--Eye In The Sky Controller-->
+        <scene sceneID="zz5-nd-7Ee">
+            <objects>
+                <viewController id="3Pq-iN-jDs" customClass="EyeInTheSkyController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E3g-od-uwA">
+                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-hW-8sN">
+                                <rect key="frame" x="0.0" y="74" width="834" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="3Pq-iN-jDs" id="b0S-YQ-Agz"/>
+                                </connections>
+                            </searchBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1E-iP-DsE">
+                                <rect key="frame" x="0.0" y="130" width="834" height="522"/>
+                            </mapView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-MZ-Y6a">
+                                <rect key="frame" x="0.0" y="652" width="834" height="522"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eEO-MZ-Y6a" firstAttribute="top" secondItem="D1E-iP-DsE" secondAttribute="bottom" id="PbK-z3-Mlr"/>
+                            <constraint firstItem="CiT-hW-8sN" firstAttribute="trailing" secondItem="jPf-UH-4Sk" secondAttribute="trailing" id="QWz-NV-iaG"/>
+                            <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="eEO-MZ-Y6a" secondAttribute="trailing" id="R4V-tI-IC9"/>
+                            <constraint firstItem="D1E-iP-DsE" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="WIu-1m-X97"/>
+                            <constraint firstItem="jPf-UH-4Sk" firstAttribute="bottom" secondItem="eEO-MZ-Y6a" secondAttribute="bottom" id="WrH-T5-c5x"/>
+                            <constraint firstItem="eEO-MZ-Y6a" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="bz7-9C-KAf"/>
+                            <constraint firstItem="CiT-hW-8sN" firstAttribute="top" secondItem="jPf-UH-4Sk" secondAttribute="top" id="eH9-VJ-mhX"/>
+                            <constraint firstItem="CiT-hW-8sN" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="qEX-4b-qzT"/>
+                            <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="D1E-iP-DsE" secondAttribute="trailing" id="vTP-Bp-b2G"/>
+                            <constraint firstItem="D1E-iP-DsE" firstAttribute="top" secondItem="CiT-hW-8sN" secondAttribute="bottom" id="wh5-VQ-eTx"/>
+                            <constraint firstItem="eEO-MZ-Y6a" firstAttribute="height" secondItem="D1E-iP-DsE" secondAttribute="height" id="xpe-cV-du8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jPf-UH-4Sk"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="eEO-MZ-Y6a" id="GwJ-ZS-3X2"/>
+                        <outlet property="mapView" destination="D1E-iP-DsE" id="bne-AW-U7w"/>
+                        <outlet property="searchDisplayController" destination="D8T-bu-HMt" id="Jh6-dn-ase"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cRq-QU-Qnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="D8T-bu-HMt">
+                    <connections>
+                        <outlet property="delegate" destination="3Pq-iN-jDs" id="INn-On-nRa"/>
+                        <outlet property="searchBar" destination="CiT-hW-8sN" id="GdM-h6-gIL"/>
+                        <outlet property="searchContentsController" destination="3Pq-iN-jDs" id="KvF-NN-nbr"/>
+                        <outlet property="searchResultsDataSource" destination="3Pq-iN-jDs" id="8JH-IW-qKs"/>
+                        <outlet property="searchResultsDelegate" destination="3Pq-iN-jDs" id="mm9-5M-Z0g"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="624" y="664"/>
         </scene>
         <!--Rover Photo List Controller-->
         <scene sceneID="N12-m0-YRn">
