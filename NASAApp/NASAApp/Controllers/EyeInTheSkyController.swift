@@ -63,6 +63,11 @@ class EyeInTheSkyController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
         adjustMap(with: coordinate)
+        imageView.isHidden = true
+        self.activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        fetchEarthPhoto(forCoordinate: coordinate)
+
     }
     
     @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {

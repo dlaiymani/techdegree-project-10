@@ -110,7 +110,7 @@
                         <viewLayoutGuide key="safeArea" id="jPf-UH-4Sk"/>
                     </view>
                     <navigationItem key="navigationItem" title="Eyes In The Sky" id="isX-iN-wYL">
-                        <barButtonItem key="rightBarButtonItem" title="Clear Annotations" id="2da-zx-Vg8">
+                        <barButtonItem key="rightBarButtonItem" title="Current Location" id="2da-zx-Vg8">
                             <connections>
                                 <action selector="clearAnnotations:" destination="3Pq-iN-jDs" id="cc2-Ty-GKN"/>
                             </connections>

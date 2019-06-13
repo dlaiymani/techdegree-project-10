@@ -113,6 +113,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         let coordinate = Coordinate(location: location.coordinate)
         currentLocation = location
         delegate?.obtainedCoordinates(coordinate)
+        manager.stopUpdatingLocation()
         
     }
     
