@@ -36,6 +36,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     weak var permissionsDelegate: LocationPermissionsDelegate?
     weak var delegate: LocationManagerDelegate?
     
+    var currentLocation: CLLocation?
+    
     // State of the authorization
     static var isAuthorized: Bool {
         switch CLLocationManager.authorizationStatus() {
@@ -109,6 +111,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         let coordinate = Coordinate(location: location.coordinate)
+        currentLocation = location
         delegate?.obtainedCoordinates(coordinate)
         
     }

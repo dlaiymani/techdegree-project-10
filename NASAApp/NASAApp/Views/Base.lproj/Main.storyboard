@@ -62,7 +62,7 @@
             </objects>
             <point key="canvasLocation" x="624.46043165467631" y="-58.291457286432163"/>
         </scene>
-        <!--Eye In The Sky Controller-->
+        <!--Eyes In The Sky-->
         <scene sceneID="zz5-nd-7Ee">
             <objects>
                 <viewController id="3Pq-iN-jDs" customClass="EyeInTheSkyController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -109,6 +109,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jPf-UH-4Sk"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Eyes In The Sky" id="isX-iN-wYL">
+                        <barButtonItem key="rightBarButtonItem" title="Clear Annotations" id="2da-zx-Vg8">
+                            <connections>
+                                <action selector="clearAnnotations:" destination="3Pq-iN-jDs" id="cc2-Ty-GKN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="cUG-Ys-All" id="Qdk-Bo-gyc"/>
                         <outlet property="imageView" destination="eEO-MZ-Y6a" id="GwJ-ZS-3X2"/>

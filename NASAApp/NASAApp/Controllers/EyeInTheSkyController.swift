@@ -59,6 +59,11 @@ class EyeInTheSkyController: UIViewController {
     }
     
     
+    @IBAction func clearAnnotations(_ sender: UIBarButtonItem) {
+        mapView.removeAnnotations(mapView.annotations)
+        let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
+        adjustMap(with: coordinate)
+    }
     
     @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {
         
