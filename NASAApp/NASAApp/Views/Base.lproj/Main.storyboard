@@ -70,7 +70,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-hW-8sN">
+                            <searchBar contentMode="redraw" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-hW-8sN">
                                 <rect key="frame" x="0.0" y="74" width="834" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
