@@ -14,9 +14,9 @@ struct Coordinate {
     var latitude: Double
     var longitude: Double
     
-    init(location: CLLocation) {
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
+    init(location: CLLocationCoordinate2D) {
+        self.latitude = location.latitude
+        self.longitude = location.longitude
     }
     
     init(latitude: Double, longitude: Double) {

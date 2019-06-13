@@ -17,6 +17,9 @@ class EyeInTheSkyController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet var tapGesture: UITapGestureRecognizer!
+    
+    
     private let earthPhotoAPIClient = APIClient()
     
     lazy var locationManager: LocationManager = {
@@ -55,6 +58,26 @@ class EyeInTheSkyController: UIViewController {
         }
     }
     
+    
+    
+    @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {
+        
+        if sender.state == .ended {
+            let locationInView = sender.location(in: mapView)
+            let tappedCoordinate = mapView.convert(locationInView , toCoordinateFrom: mapView)
+            addAnnotation(coordinate: tappedCoordinate)
+            let coordinate = Coordinate(location: tappedCoordinate)
+            self.obtainedCoordinates(coordinate)
+        }
+        
+    }
+    
+    func addAnnotation(coordinate:CLLocationCoordinate2D){
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+    }
+    
     func checkPermissions() {
         do {
             try locationManager.requestLocationAuthorization()
@@ -72,10 +95,13 @@ class EyeInTheSkyController: UIViewController {
         // let region = MKCoordinateRegion.init(center: coordinate2D, span: span)
         mapView.setRegion(region, animated: true)
         
-        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-        myAnnotation.coordinate = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-     //   myAnnotation.title = "Current location"
-        mapView.addAnnotation(myAnnotation)
+//        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+//        myAnnotation.coordinate = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
+//     //   myAnnotation.title = "Current location"
+//        mapView.addAnnotation(myAnnotation)
+        
+        addAnnotation(coordinate: CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude))
+        
         
     }
     

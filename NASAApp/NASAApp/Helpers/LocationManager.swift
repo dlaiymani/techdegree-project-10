@@ -108,7 +108,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        let coordinate = Coordinate(location: location)
+        let coordinate = Coordinate(location: location.coordinate)
         delegate?.obtainedCoordinates(coordinate)
         
     }

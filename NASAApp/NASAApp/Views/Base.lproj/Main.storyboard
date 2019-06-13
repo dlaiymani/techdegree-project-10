@@ -79,6 +79,10 @@
                             </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1E-iP-DsE">
                                 <rect key="frame" x="0.0" y="130" width="834" height="522"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="fpX-63-Vib" appends="YES" id="WBn-gL-01t"/>
+                                </connections>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-MZ-Y6a">
                                 <rect key="frame" x="0.0" y="652" width="834" height="522"/>
@@ -110,6 +114,7 @@
                         <outlet property="imageView" destination="eEO-MZ-Y6a" id="GwJ-ZS-3X2"/>
                         <outlet property="mapView" destination="D1E-iP-DsE" id="bne-AW-U7w"/>
                         <outlet property="searchDisplayController" destination="D8T-bu-HMt" id="Jh6-dn-ase"/>
+                        <outlet property="tapGesture" destination="fpX-63-Vib" id="0Sq-UL-NNW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cRq-QU-Qnt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,6 +127,11 @@
                         <outlet property="searchResultsDelegate" destination="3Pq-iN-jDs" id="mm9-5M-Z0g"/>
                     </connections>
                 </searchDisplayController>
+                <tapGestureRecognizer id="fpX-63-Vib">
+                    <connections>
+                        <action selector="mapTapped:" destination="3Pq-iN-jDs" id="uH7-VS-7pL"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="624" y="664"/>
         </scene>
