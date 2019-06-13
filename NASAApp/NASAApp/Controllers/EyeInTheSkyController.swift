@@ -15,6 +15,7 @@ class EyeInTheSkyController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let earthPhotoAPIClient = APIClient()
     
@@ -41,6 +42,7 @@ class EyeInTheSkyController: UIViewController {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         self.imageView.isHidden = true
+        self.activityIndicator.color = .white
         
     }
 
@@ -102,12 +104,13 @@ class EyeInTheSkyController: UIViewController {
     
     
     func displayPhoto(url: String) {
-        print(url)
         Alamofire.request(url).responseImage { response in
             if let image = response.result.value {
                 DispatchQueue.main.async {
                     self.imageView.isHidden = false
                     self.imageView.image = image
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                 }
             }
         }
@@ -123,7 +126,9 @@ extension EyeInTheSkyController: LocationManagerDelegate {
         adjustMap(with: coordinate)
         print(coordinate.latitude)
         print(coordinate.longitude)
-        
+        self.activityIndicator.isHidden = false
+        imageView.isHidden = true
+        activityIndicator.startAnimating()
         fetchEarthPhoto(forCoordinate: coordinate)
         
     }

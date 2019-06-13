@@ -83,12 +83,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-MZ-Y6a">
                                 <rect key="frame" x="0.0" y="652" width="834" height="522"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cUG-Ys-All">
+                                <rect key="frame" x="407" y="903" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="cUG-Ys-All" firstAttribute="centerY" secondItem="eEO-MZ-Y6a" secondAttribute="centerY" id="OOV-H0-pj3"/>
                             <constraint firstItem="eEO-MZ-Y6a" firstAttribute="top" secondItem="D1E-iP-DsE" secondAttribute="bottom" id="PbK-z3-Mlr"/>
                             <constraint firstItem="CiT-hW-8sN" firstAttribute="trailing" secondItem="jPf-UH-4Sk" secondAttribute="trailing" id="QWz-NV-iaG"/>
                             <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="eEO-MZ-Y6a" secondAttribute="trailing" id="R4V-tI-IC9"/>
+                            <constraint firstItem="cUG-Ys-All" firstAttribute="centerX" secondItem="eEO-MZ-Y6a" secondAttribute="centerX" id="R8N-Ib-h3n"/>
                             <constraint firstItem="D1E-iP-DsE" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="WIu-1m-X97"/>
                             <constraint firstItem="jPf-UH-4Sk" firstAttribute="bottom" secondItem="eEO-MZ-Y6a" secondAttribute="bottom" id="WrH-T5-c5x"/>
                             <constraint firstItem="eEO-MZ-Y6a" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="bz7-9C-KAf"/>
@@ -101,6 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="jPf-UH-4Sk"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="cUG-Ys-All" id="Qdk-Bo-gyc"/>
                         <outlet property="imageView" destination="eEO-MZ-Y6a" id="GwJ-ZS-3X2"/>
                         <outlet property="mapView" destination="D1E-iP-DsE" id="bne-AW-U7w"/>
                         <outlet property="searchDisplayController" destination="D8T-bu-HMt" id="Jh6-dn-ase"/>
