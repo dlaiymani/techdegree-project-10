@@ -16,6 +16,7 @@ class EyeInTheSkyController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var tableViewActivityIndicator: UIActivityIndicatorView!
     
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
@@ -249,11 +250,6 @@ extension EyeInTheSkyController: UITableViewDelegate {
         self.dataSource.update(with: [])
         self.tableView.reloadData()
     }
-    
-//    didselectrow
-//    tableView.isHidden = true
-//    self.navigationItem.rightBarButtonItem?.isEnabled = false
-    
 }
 
 
@@ -262,6 +258,7 @@ extension EyeInTheSkyController: UISearchResultsUpdating {
         guard let searchTerm = searchController.searchBar.text else { return }
         
         if !searchTerm.isEmpty {
+            tableViewActivityIndicator.startAnimating()
             search?.cancel()
             request.naturalLanguageQuery = searchTerm
             request.region = self.mapView.region
@@ -273,6 +270,7 @@ extension EyeInTheSkyController: UISearchResultsUpdating {
                     DispatchQueue.main.async {
                         self.dataSource.update(with: responses.mapItems)
                         self.tableView.reloadData()
+                        self.tableViewActivityIndicator.stopAnimating()
                     }
                 }
             }
