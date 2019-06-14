@@ -73,9 +73,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // Function which initiates the location process
     func requestLocation() {
-        print("ya")
-       // manager.requestLocation()
-
         manager.startUpdatingLocation()
     }
     

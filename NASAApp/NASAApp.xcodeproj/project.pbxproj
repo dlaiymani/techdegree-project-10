@@ -19,6 +19,7 @@
 		AA207EA622B287EA0072A14E /* EarthPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA207EA522B287EA0072A14E /* EarthPhoto.swift */; };
 		AA207EA822B375BF0072A14E /* SearchAddressResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA207EA722B375BF0072A14E /* SearchAddressResultsDataSource.swift */; };
 		AA207EAA22B377DC0072A14E /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA207EA922B377DC0072A14E /* Address.swift */; };
+		AA207EAC22B3DF4B0072A14E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA207EAB22B3DF4B0072A14E /* Date+Extension.swift */; };
 		AA4DC7A322AFCDA50000C61F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7A222AFCDA50000C61F /* AppDelegate.swift */; };
 		AA4DC7A522AFCDA50000C61F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7A422AFCDA50000C61F /* MainViewController.swift */; };
 		AA4DC7A822AFCDA50000C61F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC7A622AFCDA50000C61F /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		AA207EA522B287EA0072A14E /* EarthPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthPhoto.swift; sourceTree = "<group>"; };
 		AA207EA722B375BF0072A14E /* SearchAddressResultsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressResultsDataSource.swift; sourceTree = "<group>"; };
 		AA207EA922B377DC0072A14E /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		AA207EAB22B3DF4B0072A14E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		AA4DC79F22AFCDA50000C61F /* NASAApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASAApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4DC7A222AFCDA50000C61F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA4DC7A422AFCDA50000C61F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				AA4DC7B422AFD5900000C61F /* UIButton+Extension.swift */,
 				AA207E9F22B27D1B0072A14E /* LocationManager.swift */,
 				AA207EA322B27FC40072A14E /* AlertError.swift */,
+				AA207EAB22B3DF4B0072A14E /* Date+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				AA207E9A22B0D0680072A14E /* APIClient.swift in Sources */,
 				AA4DC7A322AFCDA50000C61F /* AppDelegate.swift in Sources */,
 				AA207E9E22B27B260072A14E /* EyeInTheSkyController.swift in Sources */,
+				AA207EAC22B3DF4B0072A14E /* Date+Extension.swift in Sources */,
 				AA207EA422B27FC40072A14E /* AlertError.swift in Sources */,
 				AA207E9522B0C9FD0072A14E /* RoverPhoto.swift in Sources */,
 				AA4DC7B522AFD5900000C61F /* UIButton+Extension.swift in Sources */,

@@ -12,6 +12,10 @@ private let reuseIdentifier = "Cell"
 
 class RoverPhotoListController: UICollectionViewController {
     
+    var picker : UIDatePicker = UIDatePicker()
+    
+    var dateToSearch = Date().dayBefore.dayBefore
+    
     lazy var dataSource: RoverPhotoListDataSource = {
         return RoverPhotoListDataSource(collectionView: self.collectionView)
     }()
@@ -22,13 +26,20 @@ class RoverPhotoListController: UICollectionViewController {
         super.viewDidLoad()
         self.collectionView.dataSource = dataSource
         
+        picker.datePickerMode = UIDatePicker.Mode.date
+        picker.maximumDate = Date().dayBefore
+        picker.addTarget(self, action: #selector(newDate), for: UIControl.Event.touchUpInside)
+        
         fetchRoverPhotos()
 
     }
     
     func fetchRoverPhotos() {
         
-        guard let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2019-6-9&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN") else {
+        let stringDate = dateToSearch.stringFromDate()
+        self.navigationItem.title = stringDate
+        
+        guard let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(stringDate)&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN") else {
             return
         }
         
@@ -49,6 +60,58 @@ class RoverPhotoListController: UICollectionViewController {
                 }
                 
             }
+        }
+    }
+    
+    @objc func newDate(_ sender: UIDatePicker) {
+        print("ya")
+    }
+    
+    
+    @IBAction func changeDate(_ sender: UIBarButtonItem) {
+        
+        if self.navigationItem.rightBarButtonItem?.title == "OK" {
+            print(picker.date)
+            dateToSearch = picker.date
+            fetchRoverPhotos()
+            picker.isHidden = true
+            self.navigationItem.rightBarButtonItem?.title = "Change Date"
+            
+        } else {
+        
+            picker.isHidden = false
+            
+            var pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
+            //picker.frame = CGRect(x: 0.0, y: 250, width: pickerSize.width, height: 200)
+            
+            //picker.frame(forAlignmentRect: CGRect(x: 0.0, y: 250, width: pickerSize.width, height: 200))
+            picker.backgroundColor = .white
+            
+            self.navigationItem.rightBarButtonItem?.title = "OK"
+            
+            
+            
+            self.view.addSubview(picker)
+            picker.translatesAutoresizingMaskIntoConstraints = false
+            
+            
+            let widthConstraint = NSLayoutConstraint(item: picker, attribute: .width, relatedBy: .equal,
+                                                     toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: pickerSize.width)
+            
+            let heightConstraint = NSLayoutConstraint(item: picker, attribute: .height, relatedBy: .equal,
+                                                      toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 150)
+            
+            let xConstraint = NSLayoutConstraint(item: picker, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
+            
+            let yConstraint = NSLayoutConstraint(item: picker, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0)
+            
+            NSLayoutConstraint.activate([widthConstraint, heightConstraint, xConstraint, yConstraint])
+            
+            
+            //        picker.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            //        picker.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            //        picker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            //        picker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         }
     }
     
