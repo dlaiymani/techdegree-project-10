@@ -89,13 +89,23 @@ class EyeInTheSkyController: UIViewController {
     
     
     @IBAction func clearAnnotations(_ sender: UIBarButtonItem) {
-        mapView.removeAnnotations(mapView.annotations)
-        let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
-        adjustMap(with: coordinate)
-        imageView.isHidden = true
-        self.activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        fetchEarthPhoto(forCoordinate: coordinate)
+        
+        if sender.title == "Cancel" {
+            self.searchController.searchBar.text = ""
+            self.tableView.isHidden = true
+            self.navigationItem.rightBarButtonItem?.title = "Current Position"
+            self.searchController.searchBar.endEditing(true)
+            self.searchController.resignFirstResponder()
+            
+        } else {
+            mapView.removeAnnotations(mapView.annotations)
+            let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
+            adjustMap(with: coordinate)
+            imageView.isHidden = true
+            self.activityIndicator.isHidden = false
+            activityIndicator.startAnimating()
+            fetchEarthPhoto(forCoordinate: coordinate)
+        }
 
     }
     
@@ -241,20 +251,18 @@ extension EyeInTheSkyController: UISearchResultsUpdating {
 // SearchBar delegate
 extension EyeInTheSkyController: UISearchBarDelegate {
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //dataSource.update(with: [])
-       // tableView.reloadData()
-        tableView.isHidden = true
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
-
-    }
     
     // When the user enter some text, the quick note view is dismissed
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         //tableView.reloadData()
         tableView.isHidden = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-
+        self.navigationItem.rightBarButtonItem?.title = "Cancel"
+        //UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.dataSource.update(with: [])
+        self.tableView.reloadData()
     }
     
     // Cross button tapped
