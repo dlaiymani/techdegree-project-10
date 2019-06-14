@@ -96,6 +96,8 @@ class EyeInTheSkyController: UIViewController {
             self.navigationItem.rightBarButtonItem?.title = "Current Position"
             self.searchController.searchBar.endEditing(true)
             self.searchController.resignFirstResponder()
+            self.searchController.searchBar.setNeedsLayout()
+
             
         } else {
             mapView.removeAnnotations(mapView.annotations)
@@ -257,7 +259,7 @@ extension EyeInTheSkyController: UISearchBarDelegate {
         //tableView.reloadData()
         tableView.isHidden = false
         self.navigationItem.rightBarButtonItem?.title = "Cancel"
-        //UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+        self.searchController.searchBar.setNeedsLayout()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -267,9 +269,9 @@ extension EyeInTheSkyController: UISearchBarDelegate {
     
     // Cross button tapped
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchText == "" {
-//            dataSource.update(with: [])
-//            tableView.reloadData()
-//        }
+        if searchText == "" {
+            dataSource.update(with: [])
+            tableView.reloadData()
+        }
     }
 }
