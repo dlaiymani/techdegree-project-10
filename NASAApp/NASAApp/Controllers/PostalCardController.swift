@@ -19,9 +19,16 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     
     @IBOutlet var colorButtons: [UIButton]!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomTextFieldConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userText.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         if let roverPhoto = roverPhoto {
            print(roverPhoto.roverImage?.size)
@@ -129,6 +136,41 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         let newImag = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImag
+    }
+    
+    
+    // MARK: - Keyboard Management
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        
+        
+        if let info = notification.userInfo, let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let frame = keyboardFrame.cgRectValue
+            
+            if UIApplication.shared.statusBarOrientation.isLandscape {
+           //     bottomConstraint.constant = frame.size.height - 20
+         //       topConstraint.constant = -frame.size.height + 210
+                bottomTextFieldConstraint.constant = frame.size.height - 20
+            } else {
+          //      bottomConstraint.constant = frame.size.height + 10
+         //       topConstraint.constant = -frame.size.height + 200
+                bottomTextFieldConstraint.constant = frame.size.height - 20
+            }
+        
+            UIView.animate(withDuration: 0.8) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        bottomTextFieldConstraint.constant = 30
+        //topConstraint.constant = 0
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     

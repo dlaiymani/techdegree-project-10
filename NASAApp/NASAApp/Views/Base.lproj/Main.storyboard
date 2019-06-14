@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XZO-R5-hkO">
-    <device id="ipad11_0rounded" orientation="portrait">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="112" translatesAutoresizingMaskIntoConstraints="NO" id="H6l-wD-CfO">
-                                <rect key="frame" x="140" y="413" width="554" height="368"/>
+                                <rect key="frame" x="107" y="328" width="554" height="368"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Lh-z7-vZX">
                                         <rect key="frame" x="0.0" y="0.0" width="554" height="128"/>
@@ -67,31 +67,31 @@
             <objects>
                 <viewController id="3Pq-iN-jDs" customClass="EyeInTheSkyController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E3g-od-uwA">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1E-iP-DsE">
-                                <rect key="frame" x="0.0" y="74" width="834" height="550"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="477"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fpX-63-Vib" appends="YES" id="WBn-gL-01t"/>
                                 </connections>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-MZ-Y6a">
-                                <rect key="frame" x="0.0" y="624" width="834" height="550"/>
+                                <rect key="frame" x="0.0" y="547" width="768" height="477"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cUG-Ys-All">
-                                <rect key="frame" x="407" y="889" width="20" height="20"/>
+                                <rect key="frame" x="374" y="775.5" width="20" height="20"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-K3-JQp">
-                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="954"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addressCell" textLabel="LBC-Iu-FJ2" detailTextLabel="Y3R-Lh-98x" style="IBUITableViewCellStyleSubtitle" id="Xzg-dx-sCM">
-                                        <rect key="frame" x="0.0" y="28" width="834" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xzg-dx-sCM" id="81i-av-5Ht">
-                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LBC-Iu-FJ2">
@@ -171,7 +171,7 @@
             <objects>
                 <collectionViewController id="iYa-Ft-4st" customClass="RoverPhotoListController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="bRB-Ut-l7N">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yaf-IT-Obh">
@@ -207,7 +207,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XSg-4g-NRD">
-                            <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
                         <connections>
@@ -226,26 +226,17 @@
             <objects>
                 <viewController id="IOh-P7-zUs" customClass="PostalCardController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q81-y8-2D2">
-                        <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHF-zQ-l06">
-                                <rect key="frame" x="0.0" y="74" width="834" height="597"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="512"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="jrq-r1-AFa">
-                                <rect key="frame" x="0.0" y="870" width="834" height="288"/>
+                                <rect key="frame" x="0.0" y="840" width="768" height="168"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your text" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjW-ei-BYw">
-                                        <rect key="frame" x="0.0" y="0.0" width="834" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <action selector="userTextValueChanged:" destination="IOh-P7-zUs" eventType="editingChanged" id="Ead-py-piS"/>
-                                        </connections>
-                                    </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="29" translatesAutoresizingMaskIntoConstraints="NO" id="aH9-l8-Yde">
-                                        <rect key="frame" x="224.5" y="120" width="385" height="40"/>
+                                        <rect key="frame" x="191.5" y="0.0" width="385" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJn-y1-N2K">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -322,7 +313,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIa-tq-Wld">
-                                        <rect key="frame" x="0.0" y="250" width="834" height="38"/>
+                                        <rect key="frame" x="0.0" y="130" width="768" height="38"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Share By Email">
@@ -334,28 +325,38 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="tjW-ei-BYw" secondAttribute="trailing" id="3FZ-P5-OIN"/>
                                     <constraint firstItem="nIa-tq-Wld" firstAttribute="leading" secondItem="jrq-r1-AFa" secondAttribute="leading" id="AH3-7A-fNa"/>
-                                    <constraint firstItem="tjW-ei-BYw" firstAttribute="leading" secondItem="jrq-r1-AFa" secondAttribute="leading" id="Psa-k1-WO0"/>
                                     <constraint firstAttribute="trailing" secondItem="nIa-tq-Wld" secondAttribute="trailing" id="euy-wS-jN7"/>
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZj-KZ-ZsS">
-                                <rect key="frame" x="0.0" y="353.5" width="834" height="38"/>
+                                <rect key="frame" x="0.0" y="307" width="768" height="38"/>
                                 <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your text" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tjW-ei-BYw">
+                                <rect key="frame" x="0.0" y="780" width="768" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="userTextValueChanged:" destination="IOh-P7-zUs" eventType="editingChanged" id="Ead-py-piS"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="jrq-r1-AFa" firstAttribute="leading" secondItem="Q81-y8-2D2" secondAttribute="leading" id="29A-NB-ieQ"/>
                             <constraint firstItem="KZj-KZ-ZsS" firstAttribute="centerY" secondItem="EHF-zQ-l06" secondAttribute="centerY" id="2ya-Lv-AD9"/>
+                            <constraint firstItem="jrq-r1-AFa" firstAttribute="top" secondItem="tjW-ei-BYw" secondAttribute="bottom" constant="30" id="9h4-ak-YK9"/>
                             <constraint firstItem="ytM-BQ-fZ5" firstAttribute="bottom" secondItem="jrq-r1-AFa" secondAttribute="bottom" constant="16" id="ATY-8F-eLv"/>
                             <constraint firstItem="KZj-KZ-ZsS" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="F3s-Ng-gyg"/>
                             <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="EHF-zQ-l06" secondAttribute="trailing" id="L04-nC-rU8"/>
                             <constraint firstItem="EHF-zQ-l06" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="MUS-8A-ASI"/>
                             <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="KZj-KZ-ZsS" secondAttribute="trailing" id="OAU-gO-TpO"/>
+                            <constraint firstItem="tjW-ei-BYw" firstAttribute="leading" secondItem="ytM-BQ-fZ5" secondAttribute="leading" id="RO8-Ea-ptQ"/>
+                            <constraint firstItem="tjW-ei-BYw" firstAttribute="trailing" secondItem="ytM-BQ-fZ5" secondAttribute="trailing" id="RoZ-AZ-Gpo"/>
                             <constraint firstItem="EHF-zQ-l06" firstAttribute="top" secondItem="ytM-BQ-fZ5" secondAttribute="top" id="SJ2-Ie-HaG"/>
                             <constraint firstItem="EHF-zQ-l06" firstAttribute="height" secondItem="Q81-y8-2D2" secondAttribute="height" multiplier="1:2" id="hdk-a3-0Eb"/>
                             <constraint firstItem="ytM-BQ-fZ5" firstAttribute="trailing" secondItem="jrq-r1-AFa" secondAttribute="trailing" id="rQY-Bl-Ods"/>
@@ -364,7 +365,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Make Your Own Postal Card" id="zRF-f0-nIV"/>
                     <connections>
+                        <outlet property="bottomConstraint" destination="ATY-8F-eLv" id="Bc7-j5-9KS"/>
+                        <outlet property="bottomTextFieldConstraint" destination="9h4-ak-YK9" id="gfH-aj-pwU"/>
                         <outlet property="roverImageView" destination="EHF-zQ-l06" id="hpF-qA-kko"/>
+                        <outlet property="topConstraint" destination="SJ2-Ie-HaG" id="AyU-B1-62i"/>
                         <outlet property="userLabel" destination="KZj-KZ-ZsS" id="grl-oc-388"/>
                         <outlet property="userText" destination="tjW-ei-BYw" id="MXg-38-E4D"/>
                         <outletCollection property="colorButtons" destination="hsE-HR-TGu" collectionClass="NSMutableArray" id="PXx-Ut-Cjk"/>
@@ -385,7 +389,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XZO-R5-hkO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vl5-uD-1TO">
-                        <rect key="frame" x="0.0" y="24" width="834" height="50"/>
+                        <rect key="frame" x="0.0" y="20" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
