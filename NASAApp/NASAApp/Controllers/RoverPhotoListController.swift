@@ -14,6 +14,7 @@ class RoverPhotoListController: UICollectionViewController {
     
     var picker : UIDatePicker = UIDatePicker()
     
+    @IBOutlet weak var activityController: UIActivityIndicatorView!
     var dateToSearch = Date().dayBefore.dayBefore
     
     lazy var dataSource: RoverPhotoListDataSource = {
@@ -43,6 +44,7 @@ class RoverPhotoListController: UICollectionViewController {
             return
         }
         
+        activityController.startAnimating()
         roverAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -56,6 +58,7 @@ class RoverPhotoListController: UICollectionViewController {
                     
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
+                        self.activityController.stopAnimating()
                     }
                 }
                 
@@ -64,7 +67,6 @@ class RoverPhotoListController: UICollectionViewController {
     }
     
     @objc func newDate(_ sender: UIDatePicker) {
-        print("ya")
     }
     
     
@@ -73,9 +75,10 @@ class RoverPhotoListController: UICollectionViewController {
         if self.navigationItem.rightBarButtonItem?.title == "OK" {
             print(picker.date)
             dateToSearch = picker.date
-            fetchRoverPhotos()
-            picker.isHidden = true
             self.navigationItem.rightBarButtonItem?.title = "Change Date"
+            picker.isHidden = true
+
+            fetchRoverPhotos()
             
         } else {
         
