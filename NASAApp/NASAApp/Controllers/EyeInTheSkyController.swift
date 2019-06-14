@@ -19,6 +19,12 @@ class EyeInTheSkyController: UIViewController {
     
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
+    @IBOutlet weak var tableView: UITableView!
+    let searchController = UISearchController(searchResultsController: nil)
+    let dataSource = SearchAddressResultsDataSource()
+
+    var request = MKLocalSearch.Request()
+    var search: MKLocalSearch?
     
     private let earthPhotoAPIClient = APIClient()
     
@@ -46,9 +52,30 @@ class EyeInTheSkyController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         self.imageView.isHidden = true
         self.activityIndicator.color = .white
+        self.setupTableView()
+        self.setupSearchBar()
+
         
     }
 
+    
+    // MARK: - Table View
+    func setupTableView() {
+        self.tableView.isHidden = true
+        self.tableView.dataSource = dataSource
+        self.tableView.delegate = self
+    }
+    
+    // MARK: - Search
+    func setupSearchBar() {
+        self.navigationItem.titleView = searchController.searchBar
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         if isAuthorized {
@@ -152,6 +179,8 @@ class EyeInTheSkyController: UIViewController {
         }
     }
     
+    
+    
 }
 
 
@@ -171,5 +200,59 @@ extension EyeInTheSkyController: LocationManagerDelegate {
     
     func failedWithError(_ error: LocationError) {
         print(error)
+    }
+}
+
+
+extension EyeInTheSkyController: UITableViewDelegate {
+    
+}
+
+
+extension EyeInTheSkyController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchTerm = searchController.searchBar.text else { return }
+        
+        if !searchTerm.isEmpty {
+            search?.cancel()
+            request.naturalLanguageQuery = searchTerm
+            request.region = self.mapView.region
+            
+            search = MKLocalSearch(request: request)
+            
+            search!.start { (responses, error) in
+                if let responses = responses {
+                    DispatchQueue.main.async {
+                        self.dataSource.update(with: responses.mapItems)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// SearchBar delegate
+extension EyeInTheSkyController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        //dataSource.update(with: [])
+       // tableView.reloadData()
+        tableView.isHidden = true
+    }
+    
+    // When the user enter some text, the quick note view is dismissed
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        //tableView.reloadData()
+        tableView.isHidden = false
+    }
+    
+    // Cross button tapped
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchText == "" {
+//            dataSource.update(with: [])
+//            tableView.reloadData()
+//        }
     }
 }

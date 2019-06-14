@@ -70,41 +70,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="CiT-hW-8sN">
-                                <rect key="frame" x="0.0" y="74" width="834" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="3Pq-iN-jDs" id="b0S-YQ-Agz"/>
-                                </connections>
-                            </searchBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="D1E-iP-DsE">
-                                <rect key="frame" x="0.0" y="130" width="834" height="522"/>
+                                <rect key="frame" x="0.0" y="74" width="834" height="550"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fpX-63-Vib" appends="YES" id="WBn-gL-01t"/>
                                 </connections>
                             </mapView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEO-MZ-Y6a">
-                                <rect key="frame" x="0.0" y="652" width="834" height="522"/>
+                                <rect key="frame" x="0.0" y="624" width="834" height="550"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cUG-Ys-All">
-                                <rect key="frame" x="407" y="903" width="20" height="20"/>
+                                <rect key="frame" x="407" y="889" width="20" height="20"/>
                             </activityIndicatorView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kHc-K3-JQp">
+                                <rect key="frame" x="0.0" y="74" width="834" height="1100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="addressCell" textLabel="LBC-Iu-FJ2" detailTextLabel="Y3R-Lh-98x" style="IBUITableViewCellStyleSubtitle" id="Xzg-dx-sCM">
+                                        <rect key="frame" x="0.0" y="28" width="834" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xzg-dx-sCM" id="81i-av-5Ht">
+                                            <rect key="frame" x="0.0" y="0.0" width="834" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LBC-Iu-FJ2">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y3R-Lh-98x">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cUG-Ys-All" firstAttribute="centerY" secondItem="eEO-MZ-Y6a" secondAttribute="centerY" id="OOV-H0-pj3"/>
                             <constraint firstItem="eEO-MZ-Y6a" firstAttribute="top" secondItem="D1E-iP-DsE" secondAttribute="bottom" id="PbK-z3-Mlr"/>
-                            <constraint firstItem="CiT-hW-8sN" firstAttribute="trailing" secondItem="jPf-UH-4Sk" secondAttribute="trailing" id="QWz-NV-iaG"/>
                             <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="eEO-MZ-Y6a" secondAttribute="trailing" id="R4V-tI-IC9"/>
                             <constraint firstItem="cUG-Ys-All" firstAttribute="centerX" secondItem="eEO-MZ-Y6a" secondAttribute="centerX" id="R8N-Ib-h3n"/>
                             <constraint firstItem="D1E-iP-DsE" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="WIu-1m-X97"/>
                             <constraint firstItem="jPf-UH-4Sk" firstAttribute="bottom" secondItem="eEO-MZ-Y6a" secondAttribute="bottom" id="WrH-T5-c5x"/>
+                            <constraint firstItem="kHc-K3-JQp" firstAttribute="top" secondItem="jPf-UH-4Sk" secondAttribute="top" id="XM3-Gp-ANZ"/>
+                            <constraint firstItem="kHc-K3-JQp" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="Xyh-zR-flr"/>
                             <constraint firstItem="eEO-MZ-Y6a" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="bz7-9C-KAf"/>
-                            <constraint firstItem="CiT-hW-8sN" firstAttribute="top" secondItem="jPf-UH-4Sk" secondAttribute="top" id="eH9-VJ-mhX"/>
-                            <constraint firstItem="CiT-hW-8sN" firstAttribute="leading" secondItem="jPf-UH-4Sk" secondAttribute="leading" id="qEX-4b-qzT"/>
+                            <constraint firstItem="jPf-UH-4Sk" firstAttribute="bottom" secondItem="kHc-K3-JQp" secondAttribute="bottom" id="pgc-ZA-Mkw"/>
+                            <constraint firstItem="D1E-iP-DsE" firstAttribute="top" secondItem="jPf-UH-4Sk" secondAttribute="top" id="sd4-65-wSR"/>
+                            <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="kHc-K3-JQp" secondAttribute="trailing" id="t15-7k-tmm"/>
                             <constraint firstItem="jPf-UH-4Sk" firstAttribute="trailing" secondItem="D1E-iP-DsE" secondAttribute="trailing" id="vTP-Bp-b2G"/>
-                            <constraint firstItem="D1E-iP-DsE" firstAttribute="top" secondItem="CiT-hW-8sN" secondAttribute="bottom" id="wh5-VQ-eTx"/>
                             <constraint firstItem="eEO-MZ-Y6a" firstAttribute="height" secondItem="D1E-iP-DsE" secondAttribute="height" id="xpe-cV-du8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jPf-UH-4Sk"/>
@@ -120,7 +144,8 @@
                         <outlet property="activityIndicator" destination="cUG-Ys-All" id="Qdk-Bo-gyc"/>
                         <outlet property="imageView" destination="eEO-MZ-Y6a" id="GwJ-ZS-3X2"/>
                         <outlet property="mapView" destination="D1E-iP-DsE" id="bne-AW-U7w"/>
-                        <outlet property="searchDisplayController" destination="D8T-bu-HMt" id="Jh6-dn-ase"/>
+                        <outlet property="searchDisplayController" destination="D8T-bu-HMt" id="3Rh-TK-bF8"/>
+                        <outlet property="tableView" destination="kHc-K3-JQp" id="BCG-vd-IjJ"/>
                         <outlet property="tapGesture" destination="fpX-63-Vib" id="0Sq-UL-NNW"/>
                     </connections>
                 </viewController>
@@ -128,7 +153,6 @@
                 <searchDisplayController id="D8T-bu-HMt">
                     <connections>
                         <outlet property="delegate" destination="3Pq-iN-jDs" id="INn-On-nRa"/>
-                        <outlet property="searchBar" destination="CiT-hW-8sN" id="GdM-h6-gIL"/>
                         <outlet property="searchContentsController" destination="3Pq-iN-jDs" id="KvF-NN-nbr"/>
                         <outlet property="searchResultsDataSource" destination="3Pq-iN-jDs" id="8JH-IW-qKs"/>
                         <outlet property="searchResultsDelegate" destination="3Pq-iN-jDs" id="mm9-5M-Z0g"/>
