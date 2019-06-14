@@ -54,6 +54,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest // default value
+        manager.distanceFilter = 300
         
     }
     
@@ -72,7 +73,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // Function which initiates the location process
     func requestLocation() {
-       // manager.stopUpdatingLocation()
+        print("ya")
+       // manager.requestLocation()
+
         manager.startUpdatingLocation()
     }
     
@@ -111,9 +114,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         let coordinate = Coordinate(location: location.coordinate)
+
         currentLocation = location
         delegate?.obtainedCoordinates(coordinate)
-        manager.stopUpdatingLocation()
+        print(coordinate.latitude)
+        print(coordinate.longitude)
+        
         
     }
     

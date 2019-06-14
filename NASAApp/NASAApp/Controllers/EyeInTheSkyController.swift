@@ -104,6 +104,7 @@ class EyeInTheSkyController: UIViewController {
 
             
         } else {
+            locationManager.requestLocation()
             mapView.removeAnnotations(mapView.annotations)
             let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
             adjustMap(with: coordinate)
@@ -207,13 +208,10 @@ extension EyeInTheSkyController: LocationManagerDelegate {
     func obtainedCoordinates(_ coordinate: Coordinate) {
         self.coordinate = coordinate
         adjustMap(with: coordinate)
-        print(coordinate.latitude)
-        print(coordinate.longitude)
         self.activityIndicator.isHidden = false
         imageView.isHidden = true
         activityIndicator.startAnimating()
         fetchEarthPhoto(forCoordinate: coordinate)
-        
     }
     
     func failedWithError(_ error: LocationError) {
