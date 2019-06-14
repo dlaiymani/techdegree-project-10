@@ -97,6 +97,9 @@ class EyeInTheSkyController: UIViewController {
             self.searchController.searchBar.endEditing(true)
             self.searchController.resignFirstResponder()
             self.searchController.searchBar.setNeedsLayout()
+            
+            self.dataSource.update(with: [])
+            self.tableView.reloadData()
 
             
         } else {
@@ -219,6 +222,34 @@ extension EyeInTheSkyController: LocationManagerDelegate {
 
 
 extension EyeInTheSkyController: UITableViewDelegate {
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // TODO: create function 
+        self.searchController.searchBar.text = ""
+        self.tableView.isHidden = true
+        self.navigationItem.rightBarButtonItem?.title = "Current Position"
+        self.searchController.searchBar.endEditing(true)
+        self.searchController.resignFirstResponder()
+        self.searchController.searchBar.setNeedsLayout()
+
+        let mapItem = dataSource.object(at: indexPath)
+        let coordinate = Coordinate(latitude: mapItem.placemark.coordinate.latitude, longitude: mapItem.placemark.coordinate.longitude)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.coordinate = coordinate
+        let address = Address(number: mapItem.placemark.subThoroughfare, street: mapItem.placemark.thoroughfare, postalCode: mapItem.placemark.postalCode, locality: mapItem.placemark.locality, country: mapItem.placemark.country, name: mapItem.placemark.name, coordinate: coordinate)
+        self.adjustMap(with: coordinate)
+        
+        imageView.isHidden = true
+        self.activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        fetchEarthPhoto(forCoordinate: coordinate)
+        
+        self.dataSource.update(with: [])
+        self.tableView.reloadData()
+    }
+    
 //    didselectrow
 //    tableView.isHidden = true
 //    self.navigationItem.rightBarButtonItem?.isEnabled = false
@@ -262,10 +293,10 @@ extension EyeInTheSkyController: UISearchBarDelegate {
         self.searchController.searchBar.setNeedsLayout()
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        self.dataSource.update(with: [])
-        self.tableView.reloadData()
-    }
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        self.dataSource.update(with: [])
+//        self.tableView.reloadData()
+//    }
     
     // Cross button tapped
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
