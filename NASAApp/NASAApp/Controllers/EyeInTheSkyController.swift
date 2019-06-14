@@ -74,6 +74,8 @@ class EyeInTheSkyController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search for locations"
+        
     }
     
     
@@ -205,6 +207,9 @@ extension EyeInTheSkyController: LocationManagerDelegate {
 
 
 extension EyeInTheSkyController: UITableViewDelegate {
+//    didselectrow
+//    tableView.isHidden = true
+//    self.navigationItem.rightBarButtonItem?.isEnabled = false
     
 }
 
@@ -240,12 +245,16 @@ extension EyeInTheSkyController: UISearchBarDelegate {
         //dataSource.update(with: [])
        // tableView.reloadData()
         tableView.isHidden = true
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+
     }
     
     // When the user enter some text, the quick note view is dismissed
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         //tableView.reloadData()
         tableView.isHidden = false
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+
     }
     
     // Cross button tapped
