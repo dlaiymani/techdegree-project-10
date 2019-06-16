@@ -15,9 +15,11 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
     
     private var data = [RoverPhoto]()
     private let collectionView: UICollectionView
+    private let viewController: UIViewController
     
-    init(collectionView: UICollectionView) {
+    init(collectionView: UICollectionView, viewController: UIViewController) {
         self.collectionView = collectionView
+        self.viewController = viewController
         super.init()
     }
     
@@ -32,17 +34,19 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         let photo = data[indexPath.row]
         
         let url = URL(string: photo.roverImageSource)
-       // print(url)
 
         Alamofire.request(url!).responseImage { response in
-            if let image = response.result.value {
-                DispatchQueue.main.async {
-                    photoCell.photoView.image = image
-                    self.data[indexPath.row].roverImage = image
+            if let error = response.error {
+                self.viewController.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
+            } else {
+                if let image = response.result.value {
+                    DispatchQueue.main.async {
+                        photoCell.photoView.image = image
+                        self.data[indexPath.row].roverImage = image
+                    }
                 }
             }
         }
-        
         return photoCell
     }
     

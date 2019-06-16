@@ -18,7 +18,7 @@ class RoverPhotoListController: UICollectionViewController {
     var dateToSearch = Date().dayBefore.dayBefore
     
     lazy var dataSource: RoverPhotoListDataSource = {
-        return RoverPhotoListDataSource(collectionView: self.collectionView)
+        return RoverPhotoListDataSource(collectionView: self.collectionView, viewController: self as UIViewController)
     }()
     
     private let roverAPIClient = APIClient()
@@ -47,18 +47,21 @@ class RoverPhotoListController: UICollectionViewController {
         activityController.startAnimating()
         roverAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
-                print(error.localizedDescription)
+                self.showAlert(withTitle: "Network error", message: error.localizedDescription)
             } else {
                 if let jsonData = jsonData {
                     let decoder = JSONDecoder()
                     //let jsonDict = json[0]["photos"] as! [Any]
                     let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
                     let roverPhotos = photos["photos"]!
-                    self.dataSource.updateData(roverPhotos)
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.activityController.stopAnimating()
+                    if roverPhotos.count == 0 {
+                        self.showAlert(withTitle: "No Photo", message: "Please try to change the date")
+                    } else {
+                        self.dataSource.updateData(roverPhotos)
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            self.activityController.stopAnimating()
+                        }
                     }
                 }
                 
