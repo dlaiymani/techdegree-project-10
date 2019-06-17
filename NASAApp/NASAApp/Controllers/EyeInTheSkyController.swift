@@ -195,9 +195,6 @@ class EyeInTheSkyController: UIViewController {
             }
         }
     }
-    
-    
-    
 }
 
 
@@ -213,7 +210,8 @@ extension EyeInTheSkyController: LocationManagerDelegate {
     }
     
     func failedWithError(_ error: LocationError) {
-        print(error)
+        let alertError = AlertError(error: error, on: self)
+        alertError.displayAlert()
     }
 }
 
@@ -281,7 +279,6 @@ extension EyeInTheSkyController: UISearchBarDelegate {
     
     // When the user enter some text, the quick note view is dismissed
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        //tableView.reloadData()
         tableView.isHidden = false
         self.navigationItem.rightBarButtonItem?.title = "Cancel"
         self.searchController.searchBar.setNeedsLayout()

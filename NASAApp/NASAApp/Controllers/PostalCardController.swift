@@ -39,7 +39,6 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
                 button.layer.cornerRadius = button.frame.width/2
                 button.layer.masksToBounds = true
             }
-            
         }
     }
     
@@ -88,17 +87,6 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
             // show failure alert
         }
         
-        
-//        let shareViewController = UIActivityViewController(activityItems: [newImage, "hello"], applicationActivities: nil)
-//
-//     //   let shareViewController = UIActivityViewController(activityItems: [newImage], applicationActivities: nil)
-//        present(shareViewController, animated: true, completion: nil)
-//        if let popOver = shareViewController.popoverPresentationController {
-//            popOver.sourceView = self.view
-//            popOver.barButtonItem = self.navigationItem.rightBarButtonItem;
-//
-//           // popOver.sourceRect = popOver.barButtonItem
-//        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
@@ -140,7 +128,6 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     
     
     // MARK: - Keyboard Management
-    
     @objc func keyboardWillShow(_ notification: Notification) {
         
         
@@ -148,12 +135,8 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
             let frame = keyboardFrame.cgRectValue
             
             if UIApplication.shared.statusBarOrientation.isLandscape {
-           //     bottomConstraint.constant = frame.size.height - 20
-         //       topConstraint.constant = -frame.size.height + 210
                 bottomTextFieldConstraint.constant = frame.size.height - 20
             } else {
-          //      bottomConstraint.constant = frame.size.height + 10
-         //       topConstraint.constant = -frame.size.height + 200
                 bottomTextFieldConstraint.constant = frame.size.height - 20
             }
         
@@ -166,16 +149,11 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     
     @objc func keyboardWillHide(_ notification: Notification) {
         bottomTextFieldConstraint.constant = 30
-        //topConstraint.constant = 0
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-    
-    
-    
-
 }
 
 extension PostalCardController: UITextFieldDelegate {
@@ -185,7 +163,4 @@ extension PostalCardController: UITextFieldDelegate {
         
         return true
     }
-    
-
-    
 }

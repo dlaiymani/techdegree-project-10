@@ -9,14 +9,17 @@
 import XCTest
 @testable import NASAApp
 @testable import Alamofire
+import CoreLocation
 
 class NASAAppTests: XCTestCase {
 
     var roverAPIClient: APIClient!
+
     
     override func setUp() {
         super.setUp()
         roverAPIClient = APIClient()
+        
     }
 
     func testValidCallToMarsRover() {
@@ -55,7 +58,6 @@ class NASAAppTests: XCTestCase {
         
         Alamofire.request(url!).responseImage { response in
             if let error = response.error {
-               // self.viewController.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
                 XCTFail("Error: \(error.localizedDescription)")
             } else {
                 if let image = response.result.value {
@@ -66,6 +68,8 @@ class NASAAppTests: XCTestCase {
         wait(for: [promise], timeout: 10)
     }
     
+    
+   
     
     
     
