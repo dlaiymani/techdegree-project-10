@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import NASAApp
+@testable import Alamofire
 
 class NASAAppTests: XCTestCase {
 
@@ -21,7 +22,7 @@ class NASAAppTests: XCTestCase {
     func testValidCallToMarsRover() {
         let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2019-05-05&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN")
         
-        let promise = expectation(description: "Status code: 200")
+        let promise = expectation(description: "Hitting Mars Rover API")
 
         roverAPIClient.execute(roverUrl!) { (jsonData, error) in
             if let error = error {
@@ -44,6 +45,29 @@ class NASAAppTests: XCTestCase {
         }
         wait(for: [promise], timeout: 5)
     }
+    
+    
+    func testValidCallToMarsRoverPhoto() {
+        let url = URL(string: "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/02432/opgs/edr/fcam/FLB_613396226EDR_F0760274FHAZ00302M_.JPG" )
+        
+        let promise = expectation(description: "Hitting Mars Rover Photo ")
+
+        
+        Alamofire.request(url!).responseImage { response in
+            if let error = response.error {
+               // self.viewController.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
+                XCTFail("Error: \(error.localizedDescription)")
+            } else {
+                if let image = response.result.value {
+                    promise.fulfill()
+                }
+            }
+        }
+        wait(for: [promise], timeout: 10)
+    }
+    
+    
+    
     
     override func tearDown() {
         roverAPIClient = nil
