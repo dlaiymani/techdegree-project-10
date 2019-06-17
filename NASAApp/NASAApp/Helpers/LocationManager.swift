@@ -114,10 +114,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
         currentLocation = location
         delegate?.obtainedCoordinates(coordinate)
-        print(coordinate.latitude)
-        print(coordinate.longitude)
-        
-        
     }
     
 }
