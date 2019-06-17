@@ -148,14 +148,7 @@ class EyeInTheSkyController: UIViewController {
         let coordinate2D = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let region = MKCoordinateRegion.init(center: coordinate2D, latitudinalMeters: 2500, longitudinalMeters: 2500)
         
-        // let region = MKCoordinateRegion.init(center: coordinate2D, span: span)
         mapView.setRegion(region, animated: true)
-        
-//        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-//        myAnnotation.coordinate = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude)
-//     //   myAnnotation.title = "Current location"
-//        mapView.addAnnotation(myAnnotation)
-        
         addAnnotation(coordinate: CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude))
         
         
@@ -171,7 +164,7 @@ class EyeInTheSkyController: UIViewController {
         
         earthPhotoAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
-                print(error.localizedDescription)
+                self.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
             } else {
                 if let jsonData = jsonData {
                     let decoder = JSONDecoder()
@@ -187,12 +180,17 @@ class EyeInTheSkyController: UIViewController {
     
     func displayPhoto(url: String) {
         Alamofire.request(url).responseImage { response in
-            if let image = response.result.value {
-                DispatchQueue.main.async {
-                    self.imageView.isHidden = false
-                    self.imageView.image = image
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
+            
+            if let error = response.error {
+                self.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
+            } else {
+                if let image = response.result.value {
+                    DispatchQueue.main.async {
+                        self.imageView.isHidden = false
+                        self.imageView.image = image
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                    }
                 }
             }
         }

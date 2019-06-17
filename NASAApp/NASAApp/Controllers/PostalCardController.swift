@@ -31,7 +31,7 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         if let roverPhoto = roverPhoto {
-           print(roverPhoto.roverImage?.size)
+        //   print(roverPhoto.roverImage?.size)
             roverImageView.image = roverPhoto.roverImage
             userLabel.text = roverPhoto.photoDate
             
