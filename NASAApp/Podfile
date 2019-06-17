@@ -5,4 +5,12 @@ target 'NASAApp' do
   # Pods for NASAAPP
 pod 'Alamofire', '~> 4.8'
 pod 'AlamofireImage', '~> 3.5'
+
+target 'NASAAppTests' do
+    inherit! :search_paths
+    pod 'OHHTTPStubs'
+  end 
+
+
+
 end
