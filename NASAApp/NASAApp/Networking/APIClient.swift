@@ -23,18 +23,6 @@ class APIClient {
             } else {
                 completion(response.data, nil)
             }
-            
-//            switch response.result {
-//            case .success(let json):
-//
-//                if let jsonArray = json as? [[String: Any]] {
-//                    completion(jsonArray, nil)
-//                } else if let jsonDict = json as? [String: Any] {
-//                    completion([jsonDict], nil)
-//                }
-//            case .failure(let error):
-//                completion(nil, error)
-//            }
         }
     }
 }

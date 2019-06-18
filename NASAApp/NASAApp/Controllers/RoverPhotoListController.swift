@@ -51,20 +51,23 @@ class RoverPhotoListController: UICollectionViewController {
             } else {
                 if let jsonData = jsonData {
                     let decoder = JSONDecoder()
-                    //let jsonDict = json[0]["photos"] as! [Any]
-                    let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
+                    
+                    if let photos = try? decoder.decode([String: [RoverPhoto]].self, from: jsonData) {
                     let roverPhotos = photos["photos"]!
-                    if roverPhotos.count == 0 {
-                        self.showAlert(withTitle: "No Photo", message: "Please try to change the date")
-                    } else {
-                        self.dataSource.updateData(roverPhotos)
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
-                            self.activityController.stopAnimating()
+                        if roverPhotos.count == 0 {
+                            self.showAlert(withTitle: "No Photo", message: "Please try to change the date")
+                        } else {
+                            self.dataSource.updateData(roverPhotos)
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                                self.activityController.stopAnimating()
+                            }
                         }
+                    } else {
+                        self.showAlert(withTitle: "JSON problem", message: "The server response is incorrect")
+
                     }
                 }
-                
             }
         }
     }
@@ -113,11 +116,6 @@ class RoverPhotoListController: UICollectionViewController {
             
             NSLayoutConstraint.activate([widthConstraint, heightConstraint, xConstraint, yConstraint])
             
-            
-            //        picker.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            //        picker.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            //        picker.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            //        picker.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         }
     }
     

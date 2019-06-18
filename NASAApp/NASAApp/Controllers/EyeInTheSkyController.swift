@@ -168,9 +168,13 @@ class EyeInTheSkyController: UIViewController {
             } else {
                 if let jsonData = jsonData {
                     let decoder = JSONDecoder()
-                    let photo = try! decoder.decode(EarthPhoto.self, from: jsonData)
-                    DispatchQueue.main.async {
-                        self.displayPhoto(url: photo.earthPhotoSource)
+                    
+                    if let photo = try? decoder.decode(EarthPhoto.self, from: jsonData) {
+                        DispatchQueue.main.async {
+                            self.displayPhoto(url: photo.earthPhotoSource)
+                        }
+                    } else {
+                        self.showAlert(withTitle: "JSON problem", message: "The server response is incorrect")
                     }
                 }
             }

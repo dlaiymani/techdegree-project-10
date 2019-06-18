@@ -31,10 +31,10 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         if let roverPhoto = roverPhoto {
-        //   print(roverPhoto.roverImage?.size)
             roverImageView.image = roverPhoto.roverImage
-            userLabel.text = roverPhoto.photoDate
-            
+           // userLabel.text = roverPhoto.photoDate
+            userLabel.text = "Greetings From Mars"
+
             for button in colorButtons {
                 button.layer.cornerRadius = button.frame.width/2
                 button.layer.masksToBounds = true
@@ -64,6 +64,8 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         default:
             userLabel.textColor = .black
         }
+        userLabel.pulsate()
+
     }
     
     
@@ -85,6 +87,7 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
             present(mail, animated: true)
         } else {
             // show failure alert
+            self.showAlert(withTitle: "Unable to send mail", message: "Please see your mail settings")
         }
         
     }
@@ -159,7 +162,9 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
 extension PostalCardController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        userLabel.pulsate()
         self.userText.resignFirstResponder()
+        
         
         return true
     }
