@@ -76,7 +76,6 @@ class RoverPhotoListController: UICollectionViewController {
     @IBAction func changeDate(_ sender: UIBarButtonItem) {
         
         if self.navigationItem.rightBarButtonItem?.title == "OK" {
-            print(picker.date)
             dateToSearch = picker.date
             self.navigationItem.rightBarButtonItem?.title = "Change Date"
             picker.isHidden = true
@@ -95,7 +94,8 @@ class RoverPhotoListController: UICollectionViewController {
             
             self.navigationItem.rightBarButtonItem?.title = "OK"
             
-            
+            self.picker.layer.cornerRadius = 15
+            self.picker.layer.masksToBounds = true
             
             self.view.addSubview(picker)
             picker.translatesAutoresizingMaskIntoConstraints = false
