@@ -17,7 +17,7 @@ class RoverPhotoListController: UICollectionViewController {
     @IBOutlet weak var activityController: UIActivityIndicatorView!
     var dateToSearch = Date().dayBefore.dayBefore
     
-    lazy var dataSource: RoverPhotoListDataSource = {
+    lazy var dataSource: RoverPhotoListDataSource? = {
         return RoverPhotoListDataSource(collectionView: self.collectionView, viewController: self as UIViewController)
     }()
     
@@ -30,7 +30,7 @@ class RoverPhotoListController: UICollectionViewController {
         picker.datePickerMode = UIDatePicker.Mode.date
         picker.maximumDate = Date().dayBefore
         picker.addTarget(self, action: #selector(newDate), for: UIControl.Event.touchUpInside)
-        
+
         fetchRoverPhotos()
 
     }
@@ -43,7 +43,7 @@ class RoverPhotoListController: UICollectionViewController {
         guard let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=\(stringDate)&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN") else {
             return
         }
-        
+
         activityController.startAnimating()
         roverAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
@@ -57,7 +57,7 @@ class RoverPhotoListController: UICollectionViewController {
                         if roverPhotos.count == 0 {
                             self.showAlert(withTitle: "No Photo", message: "Please try to change the date")
                         } else {
-                            self.dataSource.updateData(roverPhotos)
+                            self.dataSource?.updateData(roverPhotos)
                             DispatchQueue.main.async {
                                 self.collectionView.reloadData()
                                 self.activityController.stopAnimating()
@@ -84,6 +84,7 @@ class RoverPhotoListController: UICollectionViewController {
             picker.isHidden = true
 
             fetchRoverPhotos()
+
             
         } else {
         
@@ -119,15 +120,20 @@ class RoverPhotoListController: UICollectionViewController {
         }
     }
     
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        
+        if parent == nil {
+            self.dataSource = nil        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        
         if let cell = sender as? RoverPhotoCell, let indexPath = self.collectionView.indexPath(for: cell), let postalCardViewController = segue.destination as? PostalCardController {
            // postalCardViewController.roverImageView.image = cell.photoView.image
-            postalCardViewController.roverPhoto = dataSource.object(at: indexPath)
+            postalCardViewController.roverPhoto = dataSource?.object(at: indexPath)
         }
-        
     }
 }
 

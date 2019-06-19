@@ -60,5 +60,7 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         return self.data[indexPath.row]
     }
     
-    
+    deinit {
+        print("deini")
+    }
 }
