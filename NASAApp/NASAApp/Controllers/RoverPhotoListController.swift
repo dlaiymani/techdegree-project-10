@@ -45,7 +45,6 @@ class RoverPhotoListController: UICollectionViewController {
             return
         }
 
-        activityController.startAnimating()
         roverAPIClient.execute(roverUrl) { (jsonData, error) in
             if let error = error {
                 self.showAlert(withTitle: "Network error", message: error.localizedDescription)
@@ -60,7 +59,6 @@ class RoverPhotoListController: UICollectionViewController {
                             self.dataSource?.updateData(roverPhotos)
                             DispatchQueue.main.async {
                                 self.collectionView.reloadData()
-                                self.activityController.stopAnimating()
                             }
                         }
                     } else {

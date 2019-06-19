@@ -37,6 +37,7 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         let url = URL(string: photo.roverImageSource)
 
         // Get the associated photo
+        photoCell.activityIndicator.startAnimating()
         Alamofire.request(url!).responseImage { response in
             if let error = response.error {
                 self.viewController.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
@@ -45,6 +46,8 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
                     DispatchQueue.main.async {
                         photoCell.photoView.image = image
                         self.data[indexPath.row].roverImage = image
+                        photoCell.activityIndicator.stopAnimating()
+
                     }
                 }
             }

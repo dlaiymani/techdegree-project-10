@@ -199,15 +199,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3bp-7l-sdD">
+                                            <rect key="frame" x="90" y="90" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="qlL-pg-xqQ" firstAttribute="leading" secondItem="wuw-B1-p5R" secondAttribute="leading" id="ELs-nA-XT8"/>
+                                    <constraint firstItem="3bp-7l-sdD" firstAttribute="centerX" secondItem="wuw-B1-p5R" secondAttribute="centerX" id="UT7-sL-KxO"/>
                                     <constraint firstAttribute="trailing" secondItem="qlL-pg-xqQ" secondAttribute="trailing" id="a29-yo-Fyf"/>
                                     <constraint firstAttribute="bottom" secondItem="qlL-pg-xqQ" secondAttribute="bottom" id="aKQ-1s-3KM"/>
+                                    <constraint firstItem="3bp-7l-sdD" firstAttribute="centerY" secondItem="wuw-B1-p5R" secondAttribute="centerY" id="bba-gR-AZy"/>
                                     <constraint firstItem="qlL-pg-xqQ" firstAttribute="top" secondItem="wuw-B1-p5R" secondAttribute="top" id="xWT-9O-a13"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="3bp-7l-sdD" id="QSy-Wa-e9r"/>
                                     <outlet property="photoView" destination="qlL-pg-xqQ" id="B0u-BL-thL"/>
                                     <segue destination="IOh-P7-zUs" kind="show" identifier="PostalCardSegue" id="W7s-PS-61I"/>
                                 </connections>

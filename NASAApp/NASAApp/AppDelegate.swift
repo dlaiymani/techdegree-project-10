@@ -14,7 +14,8 @@ import UIKit
 // when using the Mars Rover Postcard (going back and forth) reaching 500 Mb and more.
 // This behavior was due to a cumulative use of the CollectionView data source. The bug is now fixed.
 //
-// 
+// Network throttle has also been tested using Network Link Conditioner. This led to the use of an Activity Indicator for each cell of the CollectionView.
+// Initially, only one main Activity Indicator was used.
 
 
 @UIApplicationMain
