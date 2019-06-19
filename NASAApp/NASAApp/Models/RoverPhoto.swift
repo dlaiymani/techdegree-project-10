@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// The RoverPhoto Struct. Extract from a JSON object so Decodable
 struct RoverPhoto: Decodable {
     
     let id: Int

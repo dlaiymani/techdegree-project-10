@@ -9,15 +9,15 @@
 import Foundation
 import Alamofire
 
-
+// A class for the Alamofire request
 class APIClient {
     
     typealias WebServiceResponse = (Data?, Error?) -> Void
     
+    // Execute an URL request and return a JSON (Data) object or an Error object
     func execute(_ url: URL, completion: @escaping WebServiceResponse) {
         
         Alamofire.request(url).validate().responseJSON { response in
-            
             if let error = response.error {
                 completion(nil, error)
             } else {
@@ -27,24 +27,3 @@ class APIClient {
     }
 }
 
-
-//Alamofire.request(.GET, "http://\(platform).eposapi.co.uk/?app_id=\(apiID)&app_key=\(apikey)&request=&request=gallery", parameters: nil)
-//    .responseJSON { response in
-//        print(response.request)  // original URL request
-//        print(response.response) // URL response
-//        print(response.data)     // server data
-//        print(response.result)   // result of response serialization
-//
-//        if let JSON = response.result.value {
-//            print("JSON: \(JSON)")
-//
-//            self.imageData = JSON as! Array<AnyObject>
-//            print(self.imageData)
-//            print("total number of images = \(self.imageData.count)")
-//            for image in self.imageData{
-//                print(image)
-//            }
-//
-//
-//
-//}

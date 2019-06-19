@@ -8,6 +8,7 @@
 
 import Foundation
 
+// A set of date functions
 extension Date {
     static var yesterday: Date { return Date().dayBefore }
     static var tomorrow:  Date { return Date().dayAfter }

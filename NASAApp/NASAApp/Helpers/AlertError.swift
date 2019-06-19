@@ -21,7 +21,7 @@ extension UIViewController {
 }
 
 
-// Allow to display an alertView corresponding to an APIError
+// Allow to display an alertView corresponding to an LocationError
 class AlertError {
     
     var error: LocationError

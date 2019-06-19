@@ -28,7 +28,7 @@
 		AA4DC7A822AFCDA50000C61F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC7A622AFCDA50000C61F /* Main.storyboard */; };
 		AA4DC7AA22AFCDA60000C61F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC7A922AFCDA60000C61F /* Assets.xcassets */; };
 		AA4DC7AD22AFCDA60000C61F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC7AB22AFCDA60000C61F /* LaunchScreen.storyboard */; };
-		AA4DC7B522AFD5900000C61F /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7B422AFD5900000C61F /* UIButton+Extension.swift */; };
+		AA4DC7B522AFD5900000C61F /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7B422AFD5900000C61F /* UILabel+Extension.swift */; };
 		AA4DC7B922AFDD1E0000C61F /* RoverPhotoListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7B822AFDD1E0000C61F /* RoverPhotoListController.swift */; };
 		AA4DC7BB22AFDDA40000C61F /* RoverPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC7BA22AFDDA40000C61F /* RoverPhotoCell.swift */; };
 /* End PBXBuildFile section */
@@ -80,7 +80,7 @@
 		AA4DC7A922AFCDA60000C61F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA4DC7AC22AFCDA60000C61F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA4DC7AE22AFCDA60000C61F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA4DC7B422AFD5900000C61F /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		AA4DC7B422AFD5900000C61F /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		AA4DC7B822AFDD1E0000C61F /* RoverPhotoListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotoListController.swift; sourceTree = "<group>"; };
 		AA4DC7BA22AFDDA40000C61F /* RoverPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoverPhotoCell.swift; sourceTree = "<group>"; };
 		B828467974F34DCCAE3A59B5 /* Pods-NASAAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NASAAppTests.release.xcconfig"; path = "Target Support Files/Pods-NASAAppTests/Pods-NASAAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 		AA207E9322AFE3510072A14E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AA4DC7B422AFD5900000C61F /* UIButton+Extension.swift */,
+				AA4DC7B422AFD5900000C61F /* UILabel+Extension.swift */,
 				AA207E9F22B27D1B0072A14E /* LocationManager.swift */,
 				AA207EA322B27FC40072A14E /* AlertError.swift */,
 				AA207EAB22B3DF4B0072A14E /* Date+Extension.swift */,
@@ -486,7 +486,7 @@
 				AA207EAC22B3DF4B0072A14E /* Date+Extension.swift in Sources */,
 				AA207EA422B27FC40072A14E /* AlertError.swift in Sources */,
 				AA207E9522B0C9FD0072A14E /* RoverPhoto.swift in Sources */,
-				AA4DC7B522AFD5900000C61F /* UIButton+Extension.swift in Sources */,
+				AA4DC7B522AFD5900000C61F /* UILabel+Extension.swift in Sources */,
 				AA207EA622B287EA0072A14E /* EarthPhoto.swift in Sources */,
 				AA4DC7BB22AFDDA40000C61F /* RoverPhotoCell.swift in Sources */,
 				AA207EAA22B377DC0072A14E /* Address.swift in Sources */,

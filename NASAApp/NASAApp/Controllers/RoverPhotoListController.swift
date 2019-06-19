@@ -91,9 +91,6 @@ class RoverPhotoListController: UICollectionViewController {
             picker.isHidden = false
             
             var pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
-            //picker.frame = CGRect(x: 0.0, y: 250, width: pickerSize.width, height: 200)
-            
-            //picker.frame(forAlignmentRect: CGRect(x: 0.0, y: 250, width: pickerSize.width, height: 200))
             picker.backgroundColor = .white
             
             self.navigationItem.rightBarButtonItem?.title = "OK"
