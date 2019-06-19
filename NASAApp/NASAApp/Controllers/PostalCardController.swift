@@ -11,12 +11,11 @@ import MessageUI
 
 class PostalCardController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    var roverPhoto: RoverPhoto?
+    var roverPhoto: RoverPhoto? // The RoverPhoto to display
     
     @IBOutlet weak var roverImageView: UIImageView!
     @IBOutlet weak var userText: UITextField!
     @IBOutlet weak var userLabel: UILabel!
-    
     @IBOutlet var colorButtons: [UIButton]!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -27,14 +26,13 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         super.viewDidLoad()
         userText.delegate = self
         
+        // Detect if the keyboeard is shown in order to adjust the view layout
         NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(PostalCardController.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         if let roverPhoto = roverPhoto {
             roverImageView.image = roverPhoto.roverImage
-           // userLabel.text = roverPhoto.photoDate
             userLabel.text = "Greetings From Mars"
-
             for button in colorButtons {
                 button.layer.cornerRadius = button.frame.width/2
                 button.layer.masksToBounds = true
@@ -42,11 +40,12 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         }
     }
     
-    
+    // Sync the photo label while the user is tapping
     @IBAction func userTextValueChanged(_ sender: UITextField) {
         userLabel.text = sender.text
     }
     
+    // Change the color of the text on the postal card
     @IBAction func colorChanged(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -69,11 +68,12 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     }
     
     
+    // Share by email
     @IBAction func sharedButtonTapped(_ sender: UIButton) {
         
+        // get a new image with the text inserted
         let newImage = addTextToImage(text: userText.text!, inImage: roverImageView.image!, atPoint: CGPoint(x: 0, y: 0))
         roverImageView.image = newImage
-        
         
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -97,7 +97,7 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     }
 
     
-    
+    // Add the text label to the image
     func addTextToImage(text: String, inImage: UIImage, atPoint:CGPoint) -> UIImage? {
     
         // Create bitmap based graphics context
@@ -109,19 +109,16 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
         let font = self.userLabel.font
         let color = self.userLabel.textColor
         
-        //let font = UIFont(name: "Snell Roundhand Bold", size: 30.0)
         
         let attributes = font != nil ? [NSAttributedString.Key.font: font, NSAttributedString.Key.foregroundColor : color] : [:]
-        let textWidth = text.size(withAttributes: attributes).width
-        let textHeight = text.size(withAttributes: attributes).height
+        let textWidth = text.size(withAttributes: attributes as [NSAttributedString.Key : Any]).width
+        let textHeight = text.size(withAttributes: attributes as [NSAttributedString.Key : Any]).height
        
-        
         let textRect = CGRect(x: drawingBounds.size.width/2 - textWidth/2, y: drawingBounds.size.height/2 - textHeight/2,
                               width: textWidth, height: textHeight)
         
-        
         userLabel.text = ""
-        text.draw(in: textRect, withAttributes: attributes)
+        text.draw(in: textRect, withAttributes: attributes as [NSAttributedString.Key : Any])
 
         // Get the image from the graphics context
         let newImag = UIGraphicsGetImageFromCurrentImageContext()
@@ -132,7 +129,6 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
     
     // MARK: - Keyboard Management
     @objc func keyboardWillShow(_ notification: Notification) {
-        
         
         if let info = notification.userInfo, let keyboardFrame = info[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let frame = keyboardFrame.cgRectValue
@@ -164,8 +160,6 @@ extension PostalCardController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         userLabel.pulsate()
         self.userText.resignFirstResponder()
-        
-        
         return true
     }
 }
