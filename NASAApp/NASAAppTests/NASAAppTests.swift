@@ -69,7 +69,7 @@ class NASAAppTests: XCTestCase {
         wait(for: [promise], timeout: 10)
     }
     
-    
+    // Test if the call to Earth View API is valid
     func testValidCallToEarthView() {
         // The Eiffel Tower
         let coordinate = Coordinate(latitude: 48.858370, longitude: 2.294481)
@@ -95,15 +95,8 @@ class NASAAppTests: XCTestCase {
         wait(for: [promise], timeout: 10)
     }
     
-   
-    
-    
-    
     override func tearDown() {
         NASAAPIClient = nil
         super.tearDown()
     }
-
-    
-
 }

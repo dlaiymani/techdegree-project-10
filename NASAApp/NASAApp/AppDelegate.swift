@@ -8,6 +8,15 @@
 
 import UIKit
 
+// App performance testing
+//
+// The amount of used memroy has been monitored trough Instruments. During the initial tests it appeared that the amount of memory used was only growing
+// when using the Mars Rover Postcard (going back and forth) reaching 500 Mb and more.
+// This behavior was due to a cumulative use of the CollectionView data source. The bug is now fixed.
+//
+// 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
