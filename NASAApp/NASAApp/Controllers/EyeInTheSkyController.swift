@@ -21,6 +21,7 @@ class EyeInTheSkyController: UIViewController {
     @IBOutlet var tapGesture: UITapGestureRecognizer!
     
     @IBOutlet weak var tableView: UITableView!
+    
     let searchController = UISearchController(searchResultsController: nil)
     let dataSource = SearchAddressResultsDataSource()
 
@@ -34,14 +35,9 @@ class EyeInTheSkyController: UIViewController {
     }()
     
     
-    var coordinate: Coordinate? {
-        didSet {
-            if let coordinate = coordinate {
-                //showNearByRestaurant(at: coordinate)
-            }
-        }
-    }
+    var coordinate: Coordinate? // The curent coordinates
     
+    // Check if location authorizations are ok
     var isAuthorized: Bool {
         let isAuthorizedForLocation = LocationManager.isAuthorized
         return isAuthorizedForLocation
@@ -55,8 +51,6 @@ class EyeInTheSkyController: UIViewController {
         self.activityIndicator.color = .white
         self.setupTableView()
         self.setupSearchBar()
-
-        
     }
 
     
@@ -66,6 +60,7 @@ class EyeInTheSkyController: UIViewController {
         self.tableView.dataSource = dataSource
         self.tableView.delegate = self
     }
+    
     
     // MARK: - Search
     func setupSearchBar() {
@@ -88,10 +83,11 @@ class EyeInTheSkyController: UIViewController {
         }
     }
     
-    
-    @IBAction func clearAnnotations(_ sender: UIBarButtonItem) {
+    // Get current location of the device and fetch the corresponding photo
+    // or cancel the search for location
+    @IBAction func getCurrentLocation(_ sender: UIBarButtonItem) {
         
-        if sender.title == "Cancel" {
+        if sender.title == "Cancel" { // Cancel the search in the search bar controller
             self.searchController.searchBar.text = ""
             self.tableView.isHidden = true
             self.navigationItem.rightBarButtonItem?.title = "Current Position"
@@ -102,8 +98,7 @@ class EyeInTheSkyController: UIViewController {
             self.dataSource.update(with: [])
             self.tableView.reloadData()
 
-            
-        } else {
+        } else { // get the current location and fetch the corresponding photo
             locationManager.requestLocation()
             mapView.removeAnnotations(mapView.annotations)
             let coordinate = Coordinate(location: locationManager.currentLocation!.coordinate)
@@ -116,6 +111,7 @@ class EyeInTheSkyController: UIViewController {
 
     }
     
+    // If the user tapped onto the map, get the associated coordinates
     @IBAction func mapTapped(_ sender: UITapGestureRecognizer) {
         
         if sender.state == .ended {
@@ -125,15 +121,16 @@ class EyeInTheSkyController: UIViewController {
             let coordinate = Coordinate(location: tappedCoordinate)
             self.obtainedCoordinates(coordinate)
         }
-        
     }
     
+    // Add an annotation onto the map at specific coordinates
     func addAnnotation(coordinate:CLLocationCoordinate2D){
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
     
+    // Chekc the location authorization
     func checkPermissions() {
         do {
             try locationManager.requestLocationAuthorization()
@@ -144,16 +141,18 @@ class EyeInTheSkyController: UIViewController {
         }
     }
     
+    
+    // Adjust the map around some coordinates
     func adjustMap(with coordinate: Coordinate) {
         let coordinate2D = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
         let region = MKCoordinateRegion.init(center: coordinate2D, latitudinalMeters: 2500, longitudinalMeters: 2500)
         
         mapView.setRegion(region, animated: true)
         addAnnotation(coordinate: CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude))
-        
-        
     }
     
+    
+    // Fecth the earth photo for some given coordinates by using the NASA API
     func fetchEarthPhoto(forCoordinate coordinate: Coordinate) {
         
         let urlString = "https://api.nasa.gov/planetary/earth/imagery/?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN"
@@ -181,7 +180,7 @@ class EyeInTheSkyController: UIViewController {
         }
     }
     
-    
+    // Display the photo associated with a given URL
     func displayPhoto(url: String) {
         Alamofire.request(url).responseImage { response in
             
@@ -202,7 +201,9 @@ class EyeInTheSkyController: UIViewController {
 }
 
 
+
 // MARK: - Location Manager Delegate
+
 extension EyeInTheSkyController: LocationManagerDelegate {
     func obtainedCoordinates(_ coordinate: Coordinate) {
         self.coordinate = coordinate
@@ -220,12 +221,12 @@ extension EyeInTheSkyController: LocationManagerDelegate {
 }
 
 
+// MARK: - UITableView Delegate for the UISearchController
+
 extension EyeInTheSkyController: UITableViewDelegate {
-    
-    
+    // When a location is choosen by the user
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // TODO: create function 
         self.searchController.searchBar.text = ""
         self.tableView.isHidden = true
         self.navigationItem.rightBarButtonItem?.title = "Current Position"
@@ -237,7 +238,7 @@ extension EyeInTheSkyController: UITableViewDelegate {
         let coordinate = Coordinate(latitude: mapItem.placemark.coordinate.latitude, longitude: mapItem.placemark.coordinate.longitude)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.coordinate = coordinate
-        let address = Address(number: mapItem.placemark.subThoroughfare, street: mapItem.placemark.thoroughfare, postalCode: mapItem.placemark.postalCode, locality: mapItem.placemark.locality, country: mapItem.placemark.country, name: mapItem.placemark.name, coordinate: coordinate)
+       // let address = Address(number: mapItem.placemark.subThoroughfare, street: mapItem.placemark.thoroughfare, postalCode: mapItem.placemark.postalCode, locality: mapItem.placemark.locality, country: mapItem.placemark.country, name: mapItem.placemark.name, coordinate: coordinate)
         self.adjustMap(with: coordinate)
         
         imageView.isHidden = true
@@ -251,7 +252,11 @@ extension EyeInTheSkyController: UITableViewDelegate {
 }
 
 
+// MARK: - UISearchResultsUpdating Delegate
+
 extension EyeInTheSkyController: UISearchResultsUpdating {
+    
+    // When the user is tapping in the SearchBar, use the MKLocalSearch API to implement geocoding
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchTerm = searchController.searchBar.text else { return }
         
@@ -276,10 +281,9 @@ extension EyeInTheSkyController: UISearchResultsUpdating {
     }
 }
 
+// MARK: - UISearchBarDelegate Delegate
 
-// SearchBar delegate
 extension EyeInTheSkyController: UISearchBarDelegate {
-    
     
     // When the user enter some text, the quick note view is dismissed
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -287,11 +291,6 @@ extension EyeInTheSkyController: UISearchBarDelegate {
         self.navigationItem.rightBarButtonItem?.title = "Cancel"
         self.searchController.searchBar.setNeedsLayout()
     }
-    
-//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//        self.dataSource.update(with: [])
-//        self.tableView.reloadData()
-//    }
     
     // Cross button tapped
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

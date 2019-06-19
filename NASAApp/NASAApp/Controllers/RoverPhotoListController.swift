@@ -88,7 +88,7 @@ class RoverPhotoListController: UICollectionViewController {
         } else { // Display the date picker and change the right barbutton title
         
             picker.isHidden = false
-            var pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
+            let pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
             picker.backgroundColor = .white
             self.navigationItem.rightBarButtonItem?.title = "OK"
             

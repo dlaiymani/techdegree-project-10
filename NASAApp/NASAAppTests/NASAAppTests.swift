@@ -11,23 +11,25 @@ import XCTest
 @testable import Alamofire
 import CoreLocation
 
+// NASA API Unit Tests (Rover and Earth)
 class NASAAppTests: XCTestCase {
 
-    var roverAPIClient: APIClient!
+    var NASAAPIClient: APIClient!
 
     
     override func setUp() {
         super.setUp()
-        roverAPIClient = APIClient()
+        NASAAPIClient = APIClient()
         
     }
 
+    // Test if the call to Mars Rover API is valid
     func testValidCallToMarsRover() {
         let roverUrl = URL(string: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2019-05-05&page=1&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN")
         
         let promise = expectation(description: "Hitting Mars Rover API")
 
-        roverAPIClient.execute(roverUrl!) { (jsonData, error) in
+        NASAAPIClient.execute(roverUrl!) { (jsonData, error) in
             if let error = error {
                 XCTFail("Error: \(error.localizedDescription)")
             } else {
@@ -36,7 +38,6 @@ class NASAAppTests: XCTestCase {
                     let photos = try! decoder.decode([String: [RoverPhoto]].self, from: jsonData)
                     let roverPhotos = photos["photos"]!
                     if roverPhotos.count == 0 {
-                       // self.showAlert(withTitle: "No Photo", message: "Please try to change the date")
                         XCTFail("Error: No Photo")
                     } else {
                       promise.fulfill()
@@ -49,7 +50,7 @@ class NASAAppTests: XCTestCase {
         wait(for: [promise], timeout: 5)
     }
     
-    
+    // Test if the call to Mars Rover Photo API is valid
     func testValidCallToMarsRoverPhoto() {
         let url = URL(string: "http://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/02432/opgs/edr/fcam/FLB_613396226EDR_F0760274FHAZ00302M_.JPG" )
         
@@ -60,7 +61,7 @@ class NASAAppTests: XCTestCase {
             if let error = response.error {
                 XCTFail("Error: \(error.localizedDescription)")
             } else {
-                if let image = response.result.value {
+                if response.result.value != nil {
                     promise.fulfill()
                 }
             }
@@ -69,15 +70,38 @@ class NASAAppTests: XCTestCase {
     }
     
     
+    func testValidCallToEarthView() {
+        // The Eiffel Tower
+        let coordinate = Coordinate(latitude: 48.858370, longitude: 2.294481)
+        let url = URL(string: "https://api.nasa.gov/planetary/earth/imagery/?lat=\(coordinate.latitude)&lon=\(coordinate.longitude)&api_key=abONaFIip0FrAmEcZLiXbZqIUw2r7dOUPmRFWZMN")
+        
+        let promise = expectation(description: "Hitting Earth Imagery Photo ")
+        
+        NASAAPIClient.execute(url!) { (jsonData, error) in
+            if let error = error {
+                XCTFail("Error: \(error.localizedDescription)")
+                
+            } else {
+                if let jsonData = jsonData {
+                    let decoder = JSONDecoder()
+                    if (try? decoder.decode(EarthPhoto.self, from: jsonData)) != nil {
+                        promise.fulfill()
+                    } else {
+                        XCTFail("Error: JSON problem")
+                    }
+                }
+            }
+        }
+        wait(for: [promise], timeout: 10)
+    }
+    
    
     
     
     
     override func tearDown() {
-        roverAPIClient = nil
+        NASAAPIClient = nil
         super.tearDown()
-        
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     

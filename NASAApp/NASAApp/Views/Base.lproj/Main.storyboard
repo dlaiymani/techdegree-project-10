@@ -138,7 +138,7 @@
                     <navigationItem key="navigationItem" title="Eyes In The Sky" id="isX-iN-wYL">
                         <barButtonItem key="rightBarButtonItem" title="Current Location" id="2da-zx-Vg8">
                             <connections>
-                                <action selector="clearAnnotations:" destination="3Pq-iN-jDs" id="cc2-Ty-GKN"/>
+                                <action selector="getCurrentLocation:" destination="3Pq-iN-jDs" id="cc2-Ty-GKN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

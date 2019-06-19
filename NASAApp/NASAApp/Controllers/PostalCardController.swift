@@ -157,6 +157,7 @@ class PostalCardController: UIViewController, MFMailComposeViewControllerDelegat
 
 extension PostalCardController: UITextFieldDelegate {
     
+    // When return is tapped the photo text is animated
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         userLabel.pulsate()
         self.userText.resignFirstResponder()

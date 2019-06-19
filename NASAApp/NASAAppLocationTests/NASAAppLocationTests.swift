@@ -10,6 +10,7 @@ import XCTest
 @testable import Pods_NASAApp
 import CoreLocation
 
+// Location Unit Tests
 class NASAAppLocationTests: XCTestCase, CLLocationManagerDelegate {
     
     
@@ -23,7 +24,6 @@ class NASAAppLocationTests: XCTestCase, CLLocationManagerDelegate {
         locationPromise = expectation(description: "Get valid coordinates")
         
     }
-    
     
     func requestLocation() {
         locationManager.startUpdatingLocation()
