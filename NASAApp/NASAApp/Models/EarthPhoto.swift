@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// The EarthPhoto Struct. Extract from a JSON object so Decodable
 struct EarthPhoto: Decodable {
     
     let id: String

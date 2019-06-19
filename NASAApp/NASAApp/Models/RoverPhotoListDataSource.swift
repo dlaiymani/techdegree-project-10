@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 import Alamofire
-//import AlamofireImage
 
+// The CollectionView DataSource for the list of Rover photos
 class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
     
     private var data = [RoverPhoto]()
@@ -28,6 +28,7 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         return data.count
     }
     
+    // A cell is the rover image associated with a RoverPhoto object
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: RoverPhotoCell.reuseIdentifier, for: indexPath) as! RoverPhotoCell
         
@@ -35,6 +36,7 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         
         let url = URL(string: photo.roverImageSource)
 
+        // Get the associated photo
         Alamofire.request(url!).responseImage { response in
             if let error = response.error {
                 self.viewController.showAlert(withTitle: "Network Problem", message: error.localizedDescription)
@@ -50,7 +52,6 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
         return photoCell
     }
     
-    
     // MARK: - Helpers
     func updateData(_ data: [RoverPhoto]) {
         self.data = data
@@ -61,6 +62,5 @@ class RoverPhotoListDataSource: NSObject, UICollectionViewDataSource {
     }
     
     deinit {
-        print("deini")
     }
 }

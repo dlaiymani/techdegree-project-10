@@ -44,12 +44,6 @@ class SearchAddressResultsDataSource: NSObject, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        switch section {
-//        case 0: return "Localities"
-//        default: return nil
-//        }
-//    }
     
     // MARK: Helpers
     
