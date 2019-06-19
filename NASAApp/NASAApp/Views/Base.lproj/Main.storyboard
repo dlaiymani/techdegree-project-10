@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Explore Mars and the Earth-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="NASAApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -50,7 +50,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="XuE-R2-Hjg"/>
+                    <navigationItem key="navigationItem" title="Explore Mars and the Earth" id="XuE-R2-Hjg"/>
                     <connections>
                         <outlet property="eyeInTheSkyButton" destination="k8L-gK-e9r" id="Bxh-LE-t6Z"/>
                         <outlet property="roverButton" destination="9Lh-z7-vZX" id="K1p-SF-dwp"/>
