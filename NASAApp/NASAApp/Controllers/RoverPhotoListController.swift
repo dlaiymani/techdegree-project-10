@@ -8,14 +8,14 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
 
 class RoverPhotoListController: UICollectionViewController {
     
-    var picker : UIDatePicker = UIDatePicker()
-    
     @IBOutlet weak var activityController: UIActivityIndicatorView!
-    var dateToSearch = Date().dayBefore.dayBefore
+    
+    private let reuseIdentifier = "Cell"
+    var picker : UIDatePicker = UIDatePicker() // To change the photo date
+    var dateToSearch = Date().dayBefore.dayBefore // The default date
     
     lazy var dataSource: RoverPhotoListDataSource? = {
         return RoverPhotoListDataSource(collectionView: self.collectionView, viewController: self as UIViewController)
@@ -35,6 +35,7 @@ class RoverPhotoListController: UICollectionViewController {
 
     }
     
+    // Fetch the Mars Rover photos for a given date
     func fetchRoverPhotos() {
         
         let stringDate = dateToSearch.stringFromDate()
@@ -51,7 +52,6 @@ class RoverPhotoListController: UICollectionViewController {
             } else {
                 if let jsonData = jsonData {
                     let decoder = JSONDecoder()
-                    
                     if let photos = try? decoder.decode([String: [RoverPhoto]].self, from: jsonData) {
                     let roverPhotos = photos["photos"]!
                         if roverPhotos.count == 0 {
@@ -75,24 +75,21 @@ class RoverPhotoListController: UICollectionViewController {
     @objc func newDate(_ sender: UIDatePicker) {
     }
     
-    
+    // If the user wants to change the date
     @IBAction func changeDate(_ sender: UIBarButtonItem) {
         
-        if self.navigationItem.rightBarButtonItem?.title == "OK" {
+        if self.navigationItem.rightBarButtonItem?.title == "OK" { // Validate a new choosen date
             dateToSearch = picker.date
             self.navigationItem.rightBarButtonItem?.title = "Change Date"
             picker.isHidden = true
 
             fetchRoverPhotos()
-
             
-        } else {
+        } else { // Display the date picker and change the right barbutton title
         
             picker.isHidden = false
-            
             var pickerSize : CGSize = picker.sizeThatFits(CGSize.zero)
             picker.backgroundColor = .white
-            
             self.navigationItem.rightBarButtonItem?.title = "OK"
             
             self.picker.layer.cornerRadius = 15
@@ -101,69 +98,33 @@ class RoverPhotoListController: UICollectionViewController {
             self.view.addSubview(picker)
             picker.translatesAutoresizingMaskIntoConstraints = false
             
-            
             let widthConstraint = NSLayoutConstraint(item: picker, attribute: .width, relatedBy: .equal,
                                                      toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: pickerSize.width)
-            
             let heightConstraint = NSLayoutConstraint(item: picker, attribute: .height, relatedBy: .equal,
                                                       toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 150)
-            
             let xConstraint = NSLayoutConstraint(item: picker, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
-            
             let yConstraint = NSLayoutConstraint(item: picker, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 1, constant: 0)
-            
             NSLayoutConstraint.activate([widthConstraint, heightConstraint, xConstraint, yConstraint])
-            
         }
     }
     
+    // If the back button is pressed, release some memory
     override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
         
+        super.didMove(toParent: parent)
         if parent == nil {
-            self.dataSource = nil        }
+            self.dataSource = nil
+        }
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        // If a photo is choosen
         if let cell = sender as? RoverPhotoCell, let indexPath = self.collectionView.indexPath(for: cell), let postalCardViewController = segue.destination as? PostalCardController {
-           // postalCardViewController.roverImageView.image = cell.photoView.image
             postalCardViewController.roverPhoto = dataSource?.object(at: indexPath)
         }
     }
 }
 
-    
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 

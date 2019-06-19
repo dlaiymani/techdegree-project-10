@@ -8,6 +8,7 @@
 
 import UIKit
 
+// The cell view of the RoverPhoto CollectionView
 class RoverPhotoCell: UICollectionViewCell {
     static let reuseIdentifier = String(describing: RoverPhotoCell.self)
     

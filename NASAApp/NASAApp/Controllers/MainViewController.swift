@@ -8,6 +8,7 @@
 
 import UIKit
 
+// The main controller
 class MainViewController: UIViewController {
     
     @IBOutlet weak var roverButton: UIButton!
@@ -20,16 +21,6 @@ class MainViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "background")!)
         
 
-    }
-
-    @IBAction func roverButtonTapped(_ sender: Any) {
-        roverButton.pulsate()
-    }
-    
-    
-    
-    @IBAction func eyeInTheSkyButtonTapped(_ sender: Any) {
-        eyeInTheSkyButton.pulsate()
     }
     
 }
